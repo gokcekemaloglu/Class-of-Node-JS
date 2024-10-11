@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="test.sqlite3" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2780"/><column_width id="4" width="0"/><expanded_item id="10" parent="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="Artist" custom_title="0" dock_id="8" table="4,6:mainArtist"/><table title="Genre" custom_title="0" dock_id="6" table="4,5:mainGenre"/><table title="Employee" custom_title="0" dock_id="7" table="4,8:mainEmployee"/><table title="Customer" custom_title="0" dock_id="4" table="4,8:mainCustomer"/><table title="Track" custom_title="0" dock_id="5" table="4,5:mainTrack"/><dock_state state="000000ff00000000fd0000000100000002000002c60000024dfc0100000001fc00000000000002c60000012d00fffffffa000000020100000006fb000000160064006f0063006b00420072006f00770073006500310000000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500340100000000ffffffff0000011e00fffffffb000000160064006f0063006b00420072006f00770073006500350100000000ffffffff0000012d00fffffffb000000160064006f0063006b00420072006f00770073006500360100000000ffffffff0000011e00fffffffb000000160064006f0063006b00420072006f00770073006500370100000000ffffffff0000011800fffffffb000000160064006f0063006b00420072006f00770073006500380100000000ffffffff0000012400ffffff000002c50000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Album" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="300"/><column index="3" value="51"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Artist" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="51"/><column index="2" value="300"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Customer" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="74"/><column index="2" value="78"/><column index="3" value="101"/><column index="4" value="300"/><column index="5" value="300"/><column index="6" value="156"/><column index="7" value="46"/><column index="8" value="117"/><column index="9" value="85"/><column index="10" value="156"/><column index="11" value="148"/><column index="12" value="234"/><column index="13" value="86"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Employee" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="74"/><column index="2" value="70"/><column index="3" value="70"/><column index="4" value="156"/><column index="5" value="65"/><column index="6" value="78"/><column index="7" value="85"/><column index="8" value="218"/><column index="9" value="85"/><column index="10" value="38"/><column index="11" value="54"/><column index="12" value="70"/><column index="13" value="140"/><column index="14" value="140"/><column index="15" value="195"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Genre" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="54"/><column index="2" value="148"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="MediaType" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="80"/><column index="2" value="218"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Track" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="51"/><column index="2" value="300"/><column index="3" value="56"/><column index="4" value="80"/><column index="5" value="54"/><column index="6" value="300"/><column index="7" value="76"/><column index="8" value="70"/><column index="9" value="59"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">-- SQL notes
+-- comment
+/*
+multiline comment
+*/
+
+-- kalıbımız SELECT sutunIsimleri FROM tabloIsmi
+
+-- Artisler
+SELECT * FROM Artist; /* * tüm sütunlar*/
+-- Artis isimleri
+SELECT Name FROM Artist;
+-- BNF
+SELECT Name 
+FROM Artist;
+-- as ifadesi
+SELECT Name as sanatciIsmi FROM Artist;
+-- (Birden fazla) sütun ismi farklı tabloda kullanılıyorsa tabloName.FieldName
+SELECT Customer.FirstName,LastName,City FROM Customer;
+-- NewYork şehrindeki müşteriler
+-- WHERE anahtarı ifadesi
+SELECT * FROM Customer WHERE City=&quot;New York&quot;; -- eşit
+SELECT * FROM Customer WHERE City=&quot;Prague&quot;; -- eşit
+SELECT * FROM Customer WHERE City!=&quot;Prague&quot;; -- farklı
+SELECT * FROM Customer WHERE City&lt;&gt;&quot;Prague&quot;; -- farklı
+-- 
+SELECT * FROM Invoice WHERE total&gt;5;
+SELECT * FROM Invoice WHERE total&gt;5 AND total&lt;10;
+SELECT * FROM Invoice WHERE total BETWEEN 5 AND 10;
+SELECT * FROM Customer WHERE City=&quot;Oslo&quot; OR City=&quot;Berli&quot;;
+
+-- ismi a ile başlayan müşteriler
+SELECT * FROM Customer WHERE FirstName like &quot;a%&quot;; -- casesensitive olması gerekirdi ama olmadı
+SELECT * FROM Customer WHERE FirstName like &quot;%a&quot;;
+SELECT * FROM Customer WHERE FirstName like &quot;H%a&quot;;
+SELECT * FROM Customer WHERE FirstName like &quot;A%&quot;;
+SELECT * FROM Customer WHERE FirstName like &quot;%a%&quot;; -- içinde a olanlar demek
+-- şehrin ilk harfi ne olursa olsun ikinci harfi o olan şehirler
+SELECT * FROM Customer WHERE City like &quot;_o%&quot;;
+SELECT * FROM Customer WHERE City like &quot;_o%e&quot;;
+
+-- Order by asc = artan default değer or DESC azalan yazmanız gerekir
+SELECT * FROM Customer ORDER BY FirstName;
+SELECT * FROM Customer ORDER BY FirstName,LastName;
+SELECT * FROM Customer ORDER BY Country;
+SELECT Country,City FROM Customer ORDER BY Country;
+SELECT Country,City FROM Customer ORDER BY Country,City;
+SELECT Country,City FROM Customer ORDER BY Country ASC; -- Normal sıralama (gerek yok)
+SELECT Country,City FROM Customer ORDER BY Country DESC; -- Tersten sıralama
+SELECT Country,City FROM Customer ORDER BY Country, City DESC; -- Contry düz sırala, City tersten sırala
+SELECT Country,City FROM Customer ORDER BY Country DESC, City ASC;
+SELECT Country,City FROM Customer ORDER BY Country DESC, City DESC;
+SELECT CustomerId,Country,City 
+FROM Customer 
+ORDER BY Country DESC, City ASC;
+</sql><sql name="SQL 2">-- SQL 2
+
+/*
+SELECT
+FROM
+AS
+WHERE
+ORDER BY ASC/DESC
+= AND OR BETWEEN
+like
+
+*/
+
+-- Müşterileri ülke tekrar etmeyecek şekilde getir
+-- tekrar eden kayıtları getirme
+-- DISTINCT
+
+SELECT DISTINCT Country, FirstName, LastName FROM Customer;
+SELECT DISTINCT Country FROM Customer;
+
+-- IN / NOT IN
+SELECT * FROM Customer WHERE Country=&quot;USA&quot; OR Country=&quot;Brazil&quot;;
+SELECT * FROM Customer WHERE Country IN(&quot;USA&quot;, Country=&quot;Brazil&quot;);
+SELECT * FROM Customer WHERE Country NOT IN(&quot;USA&quot;, Country=&quot;Brazil&quot;);
+
+-- LIMIT
+SELECT * FROM Customer WHERE Country NOT IN(&quot;USA&quot;, Country=&quot;Brazil&quot;) LIMIT 5;
+-- en yüksek miktarda faturalardan 3 tane getir
+SELECT * FROM Invoice ORDER BY total DESC LIMIT 3;
+
+-- FUNCTIONS
+-- ! dikkat tek sonuç döndürürler, tek bir satır çıkar
+-- COUNT, MIN, MAX, AVG, SUM, LENGTH
+-- kaç adet fatura kesilmiş
+SELECT * FROM Invoice;
+SELECT count(*) FROM Invoice;
+SELECT COUNT (InvoiceId) FROM Invoice; -- 412 adet
+SELECT COUNT (BillingState) FROM Invoice; -- NULL ise dahil etmez
+SELECT COUNT (*) as kesilenFaturaSayisi FROM Invoice WHERE BillingCountry=&quot;Germany&quot;;
+
+-- en düşük fatura
+-- en yüksek fatura
+
+SELECT min(total) FROM Invoice;
+
+SELECT min(total) as enDusukFatura, max(total) as enYuksekFatura, round(avg(total),2) as ortalamaFatura, sum(total) as toplamFatura FROM Invoice;
+
+SELECT avg(total), round(avg(total)), round(avg(total),2) 
+FROM Invoice;
+
+SELECT length (FirstName), FirstName from Customer;
+
+-- 
+SELECT * FROM Invoice;
+SELECT count(*) FROM Invoice WHERE BillingCountry=&quot;Germany&quot;;
+-- GROUP by
+SELECT BillingCountry, count(*) as kesilenFaturaSayisi FROM Invoice GROUP by BillingCountry;
+-- her bir ülkeden kaç müşterim var
+SELECT Country, count(*) as musteriSayisi FROM Customer GROUP by Country;
+SELECT Country,City, count(*) as musteriSayisi FROM Customer GROUP by Country,City;
+
+
+
+
+</sql><sql name="SQL 2 sub Query">-- SUB QUERY
+-- ortalama faturadan yüksek olan faturalar
+-- ortalama fatura
+SELECT round(AVG(total)) FROM Invoice;
+-- 6dan büyük faturalar
+SELECT * FROM Invoice WHERE total&gt;=6;
+-- ortalama faturadan yüksek olan faturalar
+
+SELECT *
+FROM Invoice
+WHERE total&gt;=(SELECT round(AVG(total)) FROM Invoice);
+-- ortalama süreden düşük olan parçalarını getir
+SELECT * FROM Track WHERE Milliseconds &lt; (SELECT AVG(Milliseconds) FROM Track);
+
+-- JOIN
+SELECT * FROM Track,Genre; -- bu şekilde kullanmak sağlıklı değil. eşleştirme gerçekleştirmeliyiz
+-- her bir parçayı ait olduğu tür ile beraber getir
+SELECT * FROM Track INNER JOIN Genre ON Track.GenreId=Genre.GenreId;
+SELECT Track.Name as Parca, Genre.Name as Tur 
+FROM Track 
+INNER JOIN Genre ON Track.GenreId=Genre.GenreId;
+-- hangi fatura hangi müşteriye keislmiş
+SELECT  Invoice.InvoiceId,Customer.FirstName
+FROM Invoice
+INNER JOIN Customer ON Invoice.CustomerId=Customer.CustomerId;
+SELECT  Invoice.InvoiceId,Customer.FirstName
+-- JOIN DEFAULT INNER JOIN
+FROM Invoice
+JOIN Customer ON Invoice.CustomerId=Customer.CustomerId;
+-- hangi albüm kime ait
+SELECT Album.Title,Artist.Name 
+FROM Album 
+JOIN Artist ON Album.ArtistId=Artist.ArtistId;
+
+-- LEFT JOIN
+-- türler ve bu türlere ait parçalar
+SELECT Genre.Name, Track.Name FROM Genre LEFT JOIN Track ON Genre.GenreId=Track.GenreId;
+-- hangi parça hangi albume ait
+SELECT Track.Name, Album.Title FROM Track LEFT JOIN Album ON Track.AlbumId=Album.AlbumId;
+-- Track tablosuna ait tüm verileri ilişkili tablolarla eşleştir
+SELECT Track.Name, Album.Title, MediaType.Name,Genre.Name
+FROM Track
+JOIN Album ON Track.AlbumId=Album.AlbumId
+JOIN MediaType ON Track.MediaTypeId=MediaType.MediaTypeId
+JOIN Genre ON Track.GenreId=Genre.GenreId;
+
+SELECT Track.Name, Album.Title, MediaType.Name,Genre.Name
+FROM Track
+LEFT JOIN Album ON Track.AlbumId=Album.AlbumId
+JOIN MediaType ON Track.MediaTypeId=MediaType.MediaTypeId
+JOIN Genre ON Track.GenreId=Genre.GenreId;
+
+
+
+</sql><sql name="TW-1*">SELECT Name,  FROM Track; --1
+SELECT * FROM Track; -- 2
+SELECT DISTINCT Composer FROM Track; -- 3
+SELECT DISTINCT AlbumId, MediaTypeId FROM Track; -- 4
+SELECT Name,TrackId FROM Track WHERE Composer=&quot;AC/DC&quot;; -- 5
+SELECT * FROM Invoice WHERE total&gt;25; -- 6
+SELECT * FROM Invoice WHERE total&lt;15 LIMIT 9; -- 7
+SELECT * FROM Invoice WHERE total&gt;10 ORDER BY total DESC LIMIT 2; -- 8
+SELECT * FROM Invoice WHERE BillingCountry != &quot;Canada&quot; ORDER BY total ASC LIMIT 10; --9
+SELECT * FROM Invoice WHERE NOT BillingCountry = &quot;Canada&quot; 
+ORDER BY total ASC LIMIT 10; -- 9 
+SELECT InvoiceId, CustomerId, total 
+FROM Invoice 
+ORDER BY CustomerId ASC, total DESC; -- 10
+SELECT Name FROM Track WHERE Name like &quot;B%s&quot;; --11
+SELECT InvoiceDate FROM Invoice WHERE InvoiceDate BETWEEN '2008-01-01' AND '2011-12-31' ORDER BY InvoiceDate DESC LIMIT 1; -- 12
+SELECT FirstName, LastName FROM Customer WHERE Country IN (&quot;Norway&quot;,&quot;Belgium&quot;); --13
+SELECT Composer, Name FROM Track WHERE Composer like &quot;%Zappa&quot;; --14
+SELECT (SELECT count(*) FROM Track)as sarkıSayisi , (SELECT count(*) FROM Invoice)as osman ; -- 15
+SELECT (SELECT count(DISTINCT Composer) FROM Track)as besteciler ; -- 16
+SELECT count(DISTINCT Composer) as besteciler  FROM Track ; --16
+SELECT AlbumId, count(AlbumId) as şarkısayısı From Track GROUP BY AlbumId ORDER BY şarkısayısı DESC; --17
+SELECT Name FROM Track WHERE MilliSeconds=(SELECT MIN (Milliseconds) FROM Track); -- 18
+SELECT Name FROM Track WHERE MilliSeconds=(SELECT MAX (Milliseconds) FROM Track); -- 18
+SELECT Name, MIN(Milliseconds) AS Min, MAX(Milliseconds) as Max
+FROM Track; -- 18
+SELECT * FROM Track WHERE Milliseconds&lt;(SELECT AVG(Milliseconds) FROM Track); -- 19
+SELECT composer, count(*) as parca_sayısı FROM Track WHERE Composer is NOT NULL GROUP BY Composer; --20
+SELECT Track.Name, Genre.Name FROM Track JOIN Genre ON Track.GenreId=Genre.GenreId ; -- 21
+SELECT Artist.Name, Album.Title FROM Artist JOIN Album ON Artist.ArtistId=Album.ArtistId; -- 22
+; -- 22
+SELECT *
+FROM Artist
+LEFT JOIN Album
+ON Album.ArtistId = Artist.ArtistId; --22
+
+SELECT Album.AlbumId, Album.Title, MIN(Track.Milliseconds) as minimum_süre 
+FROM Album 
+JOIN Track ON Album.AlbumId = Track.AlbumId 
+Group By Album.AlbumId, Album.Title
+ORDER BY minimum_süre DESC; -- 23
+
+SELECT Album.Title, SUM(Track.Milliseconds)/ 60000 as toplam_dakika
+FROM Album
+JOIN Track ON Album.AlbumId = Track.AlbumId
+Group By Album.Title
+HAVING toplam_dakika&gt;60
+ORDER BY toplam_dakika DESC; -- 24
+SELECT Album.Title, SUM(Track.Milliseconds) AS total_duration
+FROM Track
+JOIN Album ON Track.AlbumId = Album.AlbumId
+GROUP BY Track.AlbumId
+HAVING total_duration &gt; 3600000
+ORDER BY total_duration DESC;; -- 24
+
+SELECT TrackId, Name, AlbumId
+FROM Track
+WHERE AlbumId IN (
+SELECT AlbumId
+FROM Album
+WHERE Title IN ('Prenda Minha', 'Heart of the Night', 'Out Of Exile')); -- 25</sql><current_tab id="3"/></tab_sql></sqlb_project>
