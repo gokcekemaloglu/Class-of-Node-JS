@@ -71,3 +71,22 @@ const Car = {
 console.log(Car.detailFunction());
 console.log(Car.arrowMethod());
 
+//? Array destructuring
+
+const sampleArray = ["val1","val2","val3","val4","val5"]
+// const v1 = sampleArray[0]
+// const v2 = sampleArray[1]
+// const v3 = sampleArray[2]
+// const v4 = sampleArray.slice(2,3)
+
+// console.log(v4);
+
+const [v1, v2, ...vOthers] = sampleArray
+// eşitliğin solunda olacak
+console.log(vOthers);
+
+// spread operator eşitliğin sağı
+const newArray = ["valx",...sampleArray,"valy"]
+console.log(newArray);
+
+
