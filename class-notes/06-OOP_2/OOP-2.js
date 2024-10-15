@@ -159,31 +159,61 @@ console.log(NewInstance.methodName());
 //? #PRIVATE     Parent=YES, Child=NO, Instance=NO
 //? _PROTECTED   Parent=YES, Child=YES, Instance=NO
 
-class Vehicle{
-    publicProp= "this is public property"
-    #privateProp= "this is PRIVATE property"
-    _protectedProp= "this is PROTECTED property"
-    isActive = false
-    seatCount=5
-    hp
-    constructor(vehicleType){
-        this.vehicleType = vehicleType
-    }
-    getDetail(){
-        console.log(this.publicProp);        
-        console.log(this.#privateProp);        
-        console.log(this._protectedProp);        
-    }
-}
-const newVehicle = new Vehicle("Bus")
-console.log(newVehicle.getDetail());
+// class Vehicle{
+//     publicProp= "this is public property"
+//     #privateProp= "this is PRIVATE property"
+//     _protectedProp= "this is PROTECTED property"
+//     isActive = false
+//     seatCount=5
+//     hp
+//     constructor(vehicleType){
+//         this.vehicleType = vehicleType
+//     }
+//     getDetail(){
+//         console.log(this.publicProp);        
+//         console.log(this.#privateProp);        
+//         console.log(this._protectedProp);        
+//     }
+// }
+// const newVehicle = new Vehicle("Bus")
+// console.log(newVehicle.getDetail());
 
 
-class Car extends Vehicle {
+// class Car extends Vehicle {
+//     isRunning = false
+//     // brand="noname"
+//     constructor(brand="noname", model, year=1900, vehicleType){
+//         super(vehicleType)
+//         this.brand = brand
+//         this.model = model
+//         this.year = year
+//     }
+//     runEngine(){
+//         this.isRunning = true
+//         return this.isRunning
+//     }
+//     getDetail(){
+//         console.log(this.publicProp);        
+//         // console.log(this.#privateProp);        
+//         console.log(this._protectedProp);        
+//     }
+// }
+
+// const Mercedes = new Car("Mercedes","E200",2023,"Car")
+// console.log(Mercedes.publicProp);        
+// console.log(Mercedes.#privateProp);
+// console.log(Mercedes._protectedProp); //! protected JS desteklemez; normalde bu satır hata vermeliydi
+
+//! eğer bir property / variable _ ile başlıyorsa yani protected ise ona dokunma
+//! eğer bir değişken tamamen büyük harflerden oluşuyorsa CONST yani sabittir silme/değiştirme
+
+//? GETTER & SETTER methods
+//? STATIC keyword (class'dan erişebiliyorsunuz instance'dan erişemiyorsunuz)
+
+class Car {
     isRunning = false
-    // brand="noname"
-    constructor(brand="noname", model, year=1900, vehicleType){
-        super(vehicleType)
+    #price = 1000
+    constructor(brand="noname", model, year=1900){
         this.brand = brand
         this.model = model
         this.year = year
@@ -192,17 +222,33 @@ class Car extends Vehicle {
         this.isRunning = true
         return this.isRunning
     }
-    getDetail(){
-        console.log(this.publicProp);        
-        // console.log(this.#privateProp);        
-        console.log(this._protectedProp);        
+    // getPrice(){
+    //     return this.#price
+    // }
+    
+    get getPrice(){
+        return this.#price
+    }
+    set setPrice(price){ //! get ve set ifadeli metodlar fonksiyon olarak görmez, property olarak işlem görür
+        this.#price = price
+        return this.#price
+    }
+    static staticProp= "static deger"
+    static StaticMethod(){
+        return "this is static method"
     }
 }
 
-const Mercedes = new Car("Mercedes","E200",2023,"Car")
-console.log(Mercedes.publicProp);        
-// console.log(Mercedes.#privateProp);
-console.log(Mercedes._protectedProp); //! protected JS desteklemez; normalde bu satır hata vermeliydi
+const Mercedes = new Car("Mercedes","E200",2023)
 
-//! eğer bir property / variable _ ile başlıyorsa yani protected ise ona dokunma
-//! eğer bir değişken tamamen büyük harflerden oluşuyorsa CONST yani sabittir silme/değiştirme
+// console.log(Mercedes.getPrice());
+// console.log(Mercedes.getPrice);
+// console.log(Mercedes.setPrice=2000);//! get ve set ifadeli metodlar fonksiyon olarak görmez, property olarak işlem görür
+// console.log(Mercedes.setPrice=2000);
+
+// console.log(Mercedes.staticProp);
+console.log(Car.staticProp);
+console.log(Car.StaticMethod()); // başka yerde oluşturmadan burada yapabiliyoruz yani DRY koda faydalı oluyor
+
+
+
