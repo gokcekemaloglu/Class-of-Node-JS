@@ -110,7 +110,59 @@ console.log(NewInstance.methodName());
 
 // Overload ; js  desteklemiyor
 
+// class Vehicle{
+//     isActive = false
+//     seatCount=5
+//     hp
+//     constructor(vehicleType){
+//         this.vehicleType = vehicleType
+//     }
+//     getDetail(){
+//         console.log("this detail about vehicle");        
+//     }
+// }
+// const newVehicle = new Vehicle("Bus")
+// console.log(newVehicle.getDetail());
+
+
+// class Car extends Vehicle {
+//     isRunning = false
+//     // brand="noname"
+//     constructor(brand="noname", model, year=1900, vehicleType){
+//         super(vehicleType)
+//         this.brand = brand
+//         this.model = model
+//         this.year = year
+//     }
+//     runEngine(){
+//         this.isRunning = true
+//         return this.isRunning
+//     }
+//     // Overload (fonksiyonların aşırı yüklenmesidir)
+//     getDetail(){ //parent class'daki fonksiyon override edildi
+//         console.log("this detail about car");
+        
+//     }
+//     getDetail(x){ //parent class'daki fonksiyon override edildi
+//         console.log(x);
+        
+//     }
+// }
+
+// const Mercedes = new Car("Mercedes","E200",2023,"Car")
+// console.log(Mercedes.getDetail());
+// console.log(Mercedes.getDetail("test"));
+
+//? access modifier
+//? Encapsulation 
+//? PUBLIC       Parent=YES, Child=YES, Instance=YES
+//? #PRIVATE     Parent=YES, Child=NO, Instance=NO
+//? _PROTECTED   Parent=YES, Child=YES, Instance=NO
+
 class Vehicle{
+    publicProp= "this is public property"
+    #privateProp= "this is PRIVATE property"
+    _protectedProp= "this is PROTECTED property"
     isActive = false
     seatCount=5
     hp
@@ -118,7 +170,9 @@ class Vehicle{
         this.vehicleType = vehicleType
     }
     getDetail(){
-        console.log("this detail about vehicle");        
+        console.log(this.publicProp);        
+        console.log(this.#privateProp);        
+        console.log(this._protectedProp);        
     }
 }
 const newVehicle = new Vehicle("Bus")
@@ -138,18 +192,8 @@ class Car extends Vehicle {
         this.isRunning = true
         return this.isRunning
     }
-    // Overload (fonksiyonların aşırı yüklenmesidir)
-    getDetail(){ //parent class'daki fonksiyon override edildi
-        console.log("this detail about car");
-        
-    }
-    getDetail(x){ //parent class'daki fonksiyon override edildi
-        console.log(x);
-        
-    }
 }
 
 const Mercedes = new Car("Mercedes","E200",2023,"Car")
-console.log(Mercedes.getDetail());
-console.log(Mercedes.getDetail("test"));
-
+// console.log(Mercedes.getDetail());
+// console.log(Mercedes.getDetail("test"));
