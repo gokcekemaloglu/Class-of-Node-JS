@@ -50,6 +50,66 @@ console.log(NewInstance.methodName());
 //? INHERİTANCE = Miras Alma
 // Başka bir class'ın sahip oldukları herşeyi alıyor + kendi sahip oldukları
 
+// class Vehicle{
+//     isActive = false
+//     seatCount=5
+//     hp
+//     constructor(vehicleType){
+//         this.vehicleType = vehicleType
+//     }
+// }
+
+// class Car extends Vehicle {
+//     isRunning = false
+//     // brand="noname"
+//     constructor(brand="noname", model, year=1900, vehicleType){
+//         super(vehicleType)
+//         this.brand = brand
+//         this.model = model
+//         this.year = year
+//     }
+//     runEngine(){
+//         this.isRunning = true
+//         return this.isRunning
+//     }
+// }
+
+// const Mercedes = new Car("Mercedes","E200",2023,"Car")
+// console.log(Mercedes);
+// console.log(Mercedes.runEngine());
+
+// class Truck extends Vehicle {
+//     isRunning = false
+//     maxCapacity
+//     // brand="noname"
+//     constructor(brand="noname", model, year=1900, vehicleType){
+//         super(vehicleType)
+//         this.brand = brand
+//         this.model = model
+//         this.year = year
+//     }
+//     runEngine(){
+//         this.isRunning = true
+//         return this.isRunning
+//     }
+// }
+
+// class Accessory extends Car {
+//     constructor(accessoryName,brand, model, year, vehicleType) {
+//         super(brand, model, year, vehicleType)
+//         this.accessoryName = accessoryName
+//     }
+// }
+
+// const Seat = new Accessory("Leader", "Audi", "Q8", 2000, "Car")
+// console.log(Seat);
+
+//? Polymorphism
+
+// Override
+
+// Overload ; js  desteklemiyor
+
 class Vehicle{
     isActive = false
     seatCount=5
@@ -57,7 +117,13 @@ class Vehicle{
     constructor(vehicleType){
         this.vehicleType = vehicleType
     }
+    getDetail(){
+        console.log("this detail about vehicle");        
+    }
 }
+const newVehicle = new Vehicle("Bus")
+console.log(newVehicle.getDetail());
+
 
 class Car extends Vehicle {
     isRunning = false
@@ -72,24 +138,18 @@ class Car extends Vehicle {
         this.isRunning = true
         return this.isRunning
     }
+    // Overload (fonksiyonların aşırı yüklenmesidir)
+    getDetail(){ //parent class'daki fonksiyon override edildi
+        console.log("this detail about car");
+        
+    }
+    getDetail(x){ //parent class'daki fonksiyon override edildi
+        console.log(x);
+        
+    }
 }
 
 const Mercedes = new Car("Mercedes","E200",2023,"Car")
-console.log(Mercedes);
-// console.log(Mercedes.runEngine());
+console.log(Mercedes.getDetail());
+console.log(Mercedes.getDetail("test"));
 
-class Truck extends Vehicle {
-    isRunning = false
-    maxCapacity
-    // brand="noname"
-    constructor(brand="noname", model, year=1900, vehicleType){
-        super(vehicleType)
-        this.brand = brand
-        this.model = model
-        this.year = year
-    }
-    runEngine(){
-        this.isRunning = true
-        return this.isRunning
-    }
-}
