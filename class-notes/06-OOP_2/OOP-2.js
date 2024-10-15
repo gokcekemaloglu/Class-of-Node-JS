@@ -192,8 +192,17 @@ class Car extends Vehicle {
         this.isRunning = true
         return this.isRunning
     }
+    getDetail(){
+        console.log(this.publicProp);        
+        // console.log(this.#privateProp);        
+        console.log(this._protectedProp);        
+    }
 }
 
 const Mercedes = new Car("Mercedes","E200",2023,"Car")
-// console.log(Mercedes.getDetail());
-// console.log(Mercedes.getDetail("test"));
+console.log(Mercedes.publicProp);        
+// console.log(Mercedes.#privateProp);
+console.log(Mercedes._protectedProp); //! protected JS desteklemez; normalde bu satır hata vermeliydi
+
+//! eğer bir property / variable _ ile başlıyorsa yani protected ise ona dokunma
+//! eğer bir değişken tamamen büyük harflerden oluşuyorsa CONS yani sabittir silme/değiştirme
