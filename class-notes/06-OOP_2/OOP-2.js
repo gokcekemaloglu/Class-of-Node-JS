@@ -205,4 +205,4 @@ console.log(Mercedes.publicProp);
 console.log(Mercedes._protectedProp); //! protected JS desteklemez; normalde bu satır hata vermeliydi
 
 //! eğer bir property / variable _ ile başlıyorsa yani protected ise ona dokunma
-//! eğer bir değişken tamamen büyük harflerden oluşuyorsa CONS yani sabittir silme/değiştirme
+//! eğer bir değişken tamamen büyük harflerden oluşuyorsa CONST yani sabittir silme/değiştirme
