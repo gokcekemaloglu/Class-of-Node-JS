@@ -2,11 +2,16 @@
 
 /* ---------------------------- */
 
+// Dosyayı içe aktarma
+
 // Aşağıdaki üç yöntemi de kullanabiliriz aynı oluyor
 // require("./modules/index.js")
 // require("./modules/index")
 // require("./modules") // dosya ismi index olduğu için yazmamıza gerek kalmıyor
+
 /* ---------------------------- */
+
+// Import from Export
 
 // Bir fonksiyonu import etmeyi bu şekilde yapabiliriz
 
@@ -19,11 +24,15 @@
 
 // const arrFunc = require('./modules/index') 
 
+// console.log(arrFunc);
+
 // arrFunc[0]()
 // arrFunc[1]()
 // arrFunc[2]()
 
 /* ---------------------------- */
+
+// Array Destructuring
 
 // const arrFunc = require('./modules/index')
 
@@ -33,6 +42,8 @@
 // test3()
 
 /* ---------------------------- */
+
+// Object Destructuring
 
 // const objFunc = require('./modules/index')
 
