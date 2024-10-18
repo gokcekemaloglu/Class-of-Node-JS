@@ -25,6 +25,7 @@ const http = require("node:http"); // built in module
 
 // DEFAULT server domain (local domain) => localhost : 127.0.0.1
 
+// app.listen(PORT, HOST ()=>console.log(`Server is running at : http://${HOST}:${PORT}`)) // HOST yazsak da olur
 // app.listen(PORT, ()=>console.log(`Server is running at : http://${HOST}:${PORT}`))
 
 // console.log("Hello world!",PORT, HOST);
