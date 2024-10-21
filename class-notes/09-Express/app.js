@@ -98,7 +98,22 @@ const HOST = process.env.HOST || "127.0.0.1"
 // app.put("/",(req, res)=>{res.status(202).send({message: "updated"})})
 // app.delete("/",(req, res)=>{res.status(204).send({message: "deleted"})})
 
-app.get("/download",(req, res)=>{res.download("./app.js")})
+//?download
+// get istegi geldiğinde app.js dosyasını indir
+// app.get('/download',(req,res)=>{ res.download('./app.js')})
+// app.get("/download",(req, res)=>{res.download("./app.js", "newname.js")})
+
+//?show file  content
+// console.log(__dirname);
+// app.get('/show',(req,res)=>{ res.sendFile(__dirname + '/app.js')}) // tam dosya yolu lazım // browserda app.js dosyasında ne var ne yok gösteriyor
+
+//?redirect 301 or 302 // sayfayı yönlenrime( şu pata istek atıldığında sayfayı yönlendirsin)
+// app.get('/kalici',(req,res)=>{ res.redirect(301,'https://www.clarusway.com')}) // yonlendirmeyi cash e kaydeder
+// 127.0.0.1:8000/kalici
+// app.get('/gecici',(req,res)=>{ res.redirect (302,'https://clarusway.com/courses/')})
+
+app.get('/',(req,res)=>{ res.status(200).send({messaage:"BYE"})})
+
 
 // app.listen(8000) // en ilkel hali
 // app.listen(8000, () => console.log("Server is running"))
