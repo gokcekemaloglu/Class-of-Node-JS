@@ -63,25 +63,42 @@ const HOST = process.env.HOST || "127.0.0.1"
 
 //? URL parametre
 
-app.get("/user/:userId/:name",(req, res)=>{    
-    res.send({
-        url: {
-            protocol: req.protocol,
-            secure: req.secure,
-            url:req.url,
-            originalURL:req.originalUrl, // hangi routerda isek onu verir ileride bakılacak
-            hostname:req.hostname,
-            subdomain: req.subdomains,
+// app.get("/user/:userId/:name",(req, res)=>{    
+//     res.send({
+//         url: {
+//             protocol: req.protocol,
+//             secure: req.secure,
+//             url:req.url,
+//             originalURL:req.originalUrl, // hangi routerda isek onu verir ileride bakılacak
+//             hostname:req.hostname,
+//             subdomain: req.subdomains,
 
-            method:req.method,
-            params:req.params,
-            query:req.query,
+//             method:req.method,
+//             params:req.params,
+//             query:req.query,
+//         },
+//         id: req.params.userId
+//     })
 
-        }
-    })
+// })
+// parametreler için regex kullanabiliriz
+//     /user/:userId([0-9])/:name'   user id sadece rakamlardan oluşsun
 
-})
+//? STATUS CODES
+// default status code 200
 
+// app.get("/",(req, res)=>{
+//     // res.sendStatus(404)
+//     res.status(200).send({message: "hello"})
+//     // res.send(200,{message: "hello"}) // tedavülden kalkmış
+// })
+
+// app.get("/",(req, res)=>{res.status(200).send({message: "ok"})})
+// app.post("/",(req, res)=>{res.status(201).send({message: "created"})})
+// app.put("/",(req, res)=>{res.status(202).send({message: "updated"})})
+// app.delete("/",(req, res)=>{res.status(204).send({message: "deleted"})})
+
+app.get("/download",(req, res)=>{res.download("./app.js")})
 
 // app.listen(8000) // en ilkel hali
 // app.listen(8000, () => console.log("Server is running"))
