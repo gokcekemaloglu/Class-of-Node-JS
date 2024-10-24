@@ -24,13 +24,15 @@ app.get("/user/:id", (req, res) => {
     
     if (isNaN(id)) {
         console.log("id is not a number")        
-    } 
-    
-    res.send({
+    } else {
+        res.send({
         error: false,
         message: "Hi there!",
         id
     })
+    }
+    
+    
 })
 
 
