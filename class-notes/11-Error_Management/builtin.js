@@ -36,7 +36,7 @@ app.all("/:id", (req, res) => {
     })
 })
 
-
+app.use("/images", express.static("./images"))
 
 
 app.listen(PORT, () => console.log(`Running at: http://127.0.0.1:${PORT}`));
