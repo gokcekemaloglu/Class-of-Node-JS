@@ -19,13 +19,14 @@ const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------ */
 // Error Handling
+
 // app.get("/user/:id", (req, res) => {
 
 //     const {id} = req.params
 
 //     if (isNaN(id)) {
 //         // res.errorStatusCode = 400
-//         throw new Error("ID is not a number", {cause: "hata paramsdan gelen id'den oluştu"})
+//         throw new Error("ID is not a number", {cause: "The Error uccured at params. (hata paramsdan gelen id'den oluştu")})
 //     } else {
 //         res.send({
 //             error: false,
@@ -48,6 +49,8 @@ const PORT = process.env.PORT || 8000;
 /* ------------------------------------------ */
 
 //? TRY CATCH
+
+// errorHandler kullanmak istemiyorsak catch'e yazıyoruz herşeyi;
 
 // app.get("/user/:id", (req, res, next) => {
 //   const { id } = req.params;
@@ -72,7 +75,7 @@ const PORT = process.env.PORT || 8000;
 //         //   message: error.message,
 //         //   cause: error.cause,
 //     // });
-//     next(error)
+//     next(error) // Send the error to -> Error Handler(illaki errorHandler da kullanmak istiyorsak)
 //   }
 // });
 
@@ -124,7 +127,7 @@ const errorHandler = (error, req, res, next) => {
         error: true,
         message: error.message,
         cause: error.cause,
-        stack: error.stack // detaylı bir hata verisi veriyor
+        stack: error.stack // More detail about error(detaylı bir hata verisi veriyor)
     })
 } // herzaman en altta olacak
 app.use(errorHandler) 
