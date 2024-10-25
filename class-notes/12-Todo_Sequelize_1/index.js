@@ -26,7 +26,7 @@ const {Sequelize, DataTypes} = require("sequelize")
 const sequelize = new Sequelize("sqlite:./db.sqlite3")
 
 
-// Creating model
+//* Creating model
 // sequelize.define("todos", {attributes})
 
 sequelize.define("todos", {
@@ -62,6 +62,12 @@ sequelize.define("todos", {
     // No need to define createdAt and updateAt, they are default and authomatically created
 })
 
+//! sync - JUST EXECUTE ONCE
+// sequelize.sync() // executing model
+// sequelize.sync({force: true}) //* drop table & create table; executing model and deleting existing table if exists
+// sequelize.sync({alter: true}) //! to backup & drop table & create table from Backup
+
+
 
 
 // Connecting to DB
@@ -71,11 +77,6 @@ sequelize.authenticate()
 
 
 
-
-
-
-
-// continue from here...
 /* ------------------------------------------------------- */
 
 const errorHandler = (err, req, res, next) => {
