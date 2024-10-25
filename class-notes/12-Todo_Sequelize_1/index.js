@@ -6,8 +6,11 @@
 const express = require("express");
 const app = express();
 
+require("express-async-errors")
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
+const DB_PATH = process.env.DB_PATH || "./db.sqlite3";
+const DB_NAME = process.env.DB_NAME || "sqlite";
 
 /* ------------------------------------------------------- */
 // Accept(Parse) json data:
@@ -23,13 +26,13 @@ app.all('/', (req, res) => {
 const {Sequelize, DataTypes} = require("sequelize")
 
 // Creating new instance
-const sequelize = new Sequelize("sqlite:./db.sqlite3")
+const sequelize = new Sequelize(`${DB_NAME}:${DB_PATH}`)
 
 
 //* Creating model
 // sequelize.define("todos", {attributes})
 
-sequelize.define("todos", {
+const Todo = sequelize.define("todos", {
     // id:{  //* this attribute automatically created in sequelize
     //     type: DataTypes.INTEGER,
     //     allowNull: false, // default : true
@@ -62,10 +65,10 @@ sequelize.define("todos", {
     // No need to define createdAt and updateAt, they are default and authomatically created
 })
 
-//! sync - JUST EXECUTE ONCE
+//! sync - JUST EXECUTE ONCE // Databesi bir kere çalıştırarark tanıtıyoruz
 // sequelize.sync() // executing model
-// sequelize.sync({force: true}) //* drop table & create table; executing model and deleting existing table if exists
-// sequelize.sync({alter: true}) //! to backup & drop table & create table from Backup
+// sequelize.sync({force: true}) //* DROP TABLE & CREATE TABLE; executing model and deleting existing table if exists
+// sequelize.sync({alter: true}) //! to BACKUP & DROP TABLE & CREATE TABLE from Backup
 
 
 
@@ -74,6 +77,50 @@ sequelize.define("todos", {
 sequelize.authenticate()
     .then(()=>console.log("*DB Connected*"))
     .catch(()=>console.log(" *DB Not Connected* "))
+
+/* ------------------------------------------------------- */
+
+
+// Routes
+
+const router = express.Router()
+
+// Read Todo
+
+router.get("/todo", async(req, res) => {
+
+    // const result = await Todo.findAll()
+    const result = await Todo.findAndCountAll()
+
+    res.status(200).send({
+        error: false,
+        result
+    })
+})
+
+// Create TODO
+
+router.post("/todo", async(req, res) => {
+
+    // await Todo.create({
+    //     title: "Title1",
+    //     description: "Description1",
+    //     priority: 0,
+    //     isDone: false
+    // })
+
+    const result = await Todo.create(req.body)
+
+    res.status(201).send({        
+        error: false,
+        result
+    })
+})
+
+app.use(router)
+
+
+
 
 
 
