@@ -40,7 +40,26 @@ sequelize.define("todos", {
     //     field: "custom_name",
     //     defaultValue: 0 // default: null
     // }
-    
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    // description: {
+    //     type: DataTypes.TEXT
+    // },
+    description: DataTypes.TEXT, // tek satır olduğundan diğer kısımları kaldırıyoruz
+    priority: { // -1: low, 0: Normal, 1: High
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        defaultValue: 0
+    },
+    isDone: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    }
+
+    // No need to define createdAt and updateAt, they are default and authomatically created
 })
 
 
