@@ -107,7 +107,7 @@ router.post("/todo", async(req, res) => {
     //     description: "Description1",
     //     priority: 0,
     //     isDone: false
-    // })
+    // }) // req. body tüm bunların hepsine ulaşıyor.
 
     const result = await Todo.create(req.body)
 
@@ -116,6 +116,44 @@ router.post("/todo", async(req, res) => {
         result
     })
 })
+
+// // Update Todo
+// router.put('/todo/:id', async (req, res) => {
+//     const { id } = req.params;
+//     const [updated] = await Todo.update(req.body, {
+//         where: { id }
+//     });
+
+//     if (updated) {
+//         const updatedTodo = await Todo.findByPk(id);
+//         res.status(200).send({
+//             error: false,
+//             result: updatedTodo,
+//         });
+//     } else {
+//         res.status(404).send({
+//             error: true,
+//             message: 'Todo not found',
+//         });
+//     }
+// });
+
+// // Delete Todo
+// router.delete('/todo/:id', async (req, res) => {
+//     const { id } = req.params;
+//     const deleted = await Todo.destroy({
+//         where: { id }
+//     });
+
+//     if (deleted) {
+//         res.status(204).send();
+//     } else {
+//         res.status(404).send({
+//             error: true,
+//             message: 'Todo not found',
+//         });
+//     }
+// });
 
 app.use(router)
 
