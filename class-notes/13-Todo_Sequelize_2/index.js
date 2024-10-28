@@ -30,7 +30,7 @@ const sequelize = new Sequelize(`${DB_NAME}:${DB_PATH}`)
 
 
 //* Creating model
-// sequelize.define("todos", {attributes})
+// sequelize.define("modelName", {attributes/fields})
 
 const Todo = sequelize.define("todos", {
     // id:{  //* this attribute automatically created in sequelize
@@ -65,27 +65,27 @@ const Todo = sequelize.define("todos", {
     // No need to define createdAt and updateAt, they are default and authomatically created
 })
 
-//! sync - JUST EXECUTE ONCE // Databesi bir kere çalıştırarark tanıtıyoruz
-// sequelize.sync() // executing model
-// sequelize.sync({force: true}) //* DROP TABLE & CREATE TABLE; executing model and deleting existing table if exists
+//! sync - JUST EXECUTE ONCE // Database'i bir kere çalıştırarark tanıtıyoruz
+// sequelize.sync() // executing model-(Parametre göndermediğimiz)
+// sequelize.sync({force: true}) //* DROP TABLE & CREATE TABLE; executing model and deleting existing table if exists (dezavantajı: table'da backup yapmadan direk create yaptığı için önceden gönderdiklerimiz siliniyor)
 // sequelize.sync({alter: true}) //! to BACKUP & DROP TABLE & CREATE TABLE from Backup
 
-
-
+/* ------------------------------------------------------- */
 
 // Connecting to DB
 sequelize.authenticate()
     .then(()=>console.log("*DB Connected*"))
     .catch(()=>console.log(" *DB Not Connected* "))
-
 /* ------------------------------------------------------- */
-
 
 // Routes
 
 const router = express.Router()
+/* ------------------------------------------------------- */
 
-// Read Todo
+//! CRUD Operations
+
+//* List Todo
 
 router.get("/todo", async(req, res) => {
 
@@ -98,7 +98,7 @@ router.get("/todo", async(req, res) => {
     })
 })
 
-// Create TODO
+//* Create TODO
 
 router.post("/todo", async(req, res) => {
 
@@ -117,50 +117,57 @@ router.post("/todo", async(req, res) => {
     })
 })
 
-// // Update Todo
-// router.put('/todo/:id', async (req, res) => {
-//     const { id } = req.params;
-//     const [updated] = await Todo.update(req.body, {
-//         where: { id }
-//     });
+//* Read Todo
 
-//     if (updated) {
-//         const updatedTodo = await Todo.findByPk(id);
-//         res.status(200).send({
-//             error: false,
-//             result: updatedTodo,
-//         });
-//     } else {
-//         res.status(404).send({
-//             error: true,
-//             message: 'Todo not found',
-//         });
-//     }
-// });
+router.get("/todo/:id", async(req, res) => {
 
-// // Delete Todo
-// router.delete('/todo/:id', async (req, res) => {
-//     const { id } = req.params;
-//     const deleted = await Todo.destroy({
-//         where: { id }
-//     });
+    // const result = await Todo.findOne({where: {id: req.params.id}})
+    const result = await Todo.findByPk(req.params.id)
 
-//     if (deleted) {
-//         res.status(204).send();
-//     } else {
-//         res.status(404).send({
-//             error: true,
-//             message: 'Todo not found',
-//         });
-//     }
-// });
+    res.status(200).send({
+        error: false,
+        result
+    })
+})
+
+
+//* Update Todo
+
+router.put("/todo/:id", async(req, res) => {
+
+    // const result = await Todo.update({...newData}, {...filter})
+    const result = await Todo.update(req.body, {where: {id: req.params.id}})
+
+    const isUpdated = result[0]
+
+    res.status(isUpdated ? 202 : 404).send({
+        error: isUpdated ? false : true,
+        message: isUpdated ? "Updated" : "Something went wrong!",
+        updatedData: isUpdated && await Todo.findByPk(req.params.id)
+    })
+})
+
+
+//* Delete Todo
+
+router.delete("/todo/:id", async(req, res) => {
+
+    const isDeleted = await Todo.destroy({where: {id: req.params.id}})
+
+    if (isDeleted) {
+        res.sendStatus(204)
+    } else {
+        res.errorStatusCode = 404
+        throw new Error("Can not deleted! or Maybe already deleted.")
+    }
+
+})
+
+// result neden array gelmiyor araştır!
+
+/* ------------------------------------------------------- */
 
 app.use(router)
-
-
-
-
-
 
 /* ------------------------------------------------------- */
 
