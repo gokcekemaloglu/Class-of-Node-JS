@@ -11,10 +11,8 @@ const DB_NAME = process.env.DB_NAME || "sqlite";
 //? Sequelize
 const {Sequelize, DataTypes} = require("sequelize");
 
-
 // Creating new instance
 const sequelize = new Sequelize(`${DB_NAME}:${DB_PATH}`)
-
 
 //* Creating model
 // sequelize.define("modelName", {attributes/fields})
@@ -64,4 +62,5 @@ sequelize.authenticate()
     .then(()=>console.log("*DB Connected*"))
     .catch(()=>console.log(" *DB Not Connected* "))
 /* ------------------------------------------------------- */
+
 module.exports = Todo

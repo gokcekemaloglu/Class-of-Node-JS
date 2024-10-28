@@ -3,27 +3,27 @@
     EXPRESSJS - TODO Project with Sequelize
 ------------------------------------------------------- */
 
+
+// result neden array gelmiyor araştır! routerda
+
 const express = require("express");
 const app = express();
 
-require("express-async-errors")
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
-
-
 /* ------------------------------------------------------- */
+// AsyncErrors to errorHandler
+require("express-async-errors")
+
 // Accept(Parse) json data:
 app.use(express.json())
+/* ------------------------------------------------------- */
 
+// Routes
 app.all('/', (req, res) => {
     res.send('WELCOME TO TODO API')
 })
 
-// result neden array gelmiyor araştır!
-
-/* ------------------------------------------------------- */
-
-// Routes
 
 app.use(require("./src/routes/todo"))
 /* ------------------------------------------------------- */

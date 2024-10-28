@@ -2,6 +2,8 @@
 /* -------------------------------------------------------
     EXPRESSJS - TODO Project with Sequelize
 ------------------------------------------------------- */
+//Model
+const Todo = require("../models/todo")
 
 module.exports = {
     list: async(req, res) => {
