@@ -64,3 +64,4 @@ sequelize.authenticate()
     .then(()=>console.log("*DB Connected*"))
     .catch(()=>console.log(" *DB Not Connected* "))
 /* ------------------------------------------------------- */
+module.exports = Todo
