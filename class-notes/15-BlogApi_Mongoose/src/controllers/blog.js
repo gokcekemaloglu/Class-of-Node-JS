@@ -5,6 +5,8 @@
 
 const {BlogCategory, BlogPost} = require("../models/blog")
 
+// blogCategory should be done
+
 
 /* ------------------------------------------------------- */
 //blogCategory controllers

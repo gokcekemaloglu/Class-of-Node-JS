@@ -25,7 +25,7 @@ app.all('/', (req, res) => {
     res.send('WELCOME TO BLOG API')
 })
 
-app.use('/blog', require('./src/routes/blog'))
+app.use('/blog', require('./src/routes/blog')) // yukarıdaki route ile çalışmaması için yeni bir route belirledik
 
 
 // Catch Errors:
