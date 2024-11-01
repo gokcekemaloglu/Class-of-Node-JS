@@ -57,10 +57,10 @@ const BlogCategory = mongoose.model("BlogCategory", BlogCategorySchema)
 
 const BlogPostSchema = new mongoose.Schema({
     categoryId: { // Default relation is ManyToOne
-        ref: "BlogCategory",
+        ref: "BlogCategory", // referencing it where this field comes
         required: true,
         type: mongoose.Schema.Types.ObjectId,
-        // unique: true // convert to onetoone
+        // unique: true // convert to onetoone relation
     },
     title: {
         type: String,
