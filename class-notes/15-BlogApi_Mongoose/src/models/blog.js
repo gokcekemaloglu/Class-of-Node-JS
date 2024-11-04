@@ -70,7 +70,7 @@ const BlogPostSchema = new mongoose.Schema({
     content: {
         type: String,
         trim: true,
-        required: true
+        required: [true, "This content is required"]
     }
     //updateAt
     //createdAt
