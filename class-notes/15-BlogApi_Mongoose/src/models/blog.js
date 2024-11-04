@@ -60,7 +60,7 @@ const BlogPostSchema = new mongoose.Schema({
         ref: "BlogCategory", // referencing it where this field comes
         required: true,
         type: mongoose.Schema.Types.ObjectId,
-        // unique: true // convert to onetoone relation
+        // unique: true // convert to OneToOne relation
     },
     title: {
         type: String,
