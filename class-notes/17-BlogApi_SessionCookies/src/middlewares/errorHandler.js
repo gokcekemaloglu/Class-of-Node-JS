@@ -5,6 +5,8 @@
 
 module.exports = (err, req, res, next) => {
     const statusCode = res.errorStatusCode ?? 500
+    console.log(err);
+    
     res.status(statusCode).send({
         error: true, // special data
         message: err.message, // error string message

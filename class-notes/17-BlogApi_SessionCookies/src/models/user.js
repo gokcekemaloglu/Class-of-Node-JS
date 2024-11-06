@@ -12,12 +12,17 @@ const crypto = require('node:crypto')
 // parameters
 const keyCode = '21yuifhsdkjfgisafisadhfsgawfhssvsfifashfusagfjsdga' // secretKey 
 const loopCount = 10_000 // number of loops
-const chatCount = 32 // write 32 for 64
+const charCount = 32 // write 32 for 64
 const encType = 'sha512' // Type of algorithm
+
+// const keyCode = process.env.KEY_CODE // secretKey 
+// const loopCount = Number(process.env.LOOP_COUNT) // number of loops
+// const charCount = Number(process.env.CHAR_COUNT) // write 32 for 64
+// const encType = process.env.ENC_TYPE // Type of algorithm
 
 const passwordEncrypt = (password) => {
 
-    return crypto.pbkdf2Sync(password, keyCode, loopCount, chatCount, encType).toString('hex')
+    return crypto.pbkdf2Sync(password, keyCode, loopCount, charCount, encType).toString('hex')
 }
 
 const UserSchema = new Schema({
@@ -46,17 +51,17 @@ const UserSchema = new Schema({
         trim: true,
         required: true,
 
-        /* ------------------------------------------------------- *
+        /* ------------------------------------------------------- */
 
-        set: (password) => {
-            return 'customPassword'
-        },
-        validate: (password) => {
-            if (password.length < 5) return false
-            else true
-        },
+        // set: (password) => {
+        //     return 'customPassword'
+        // },
+        // validate: (password) => {
+        //     if (password.length < 5) return false
+        //     else true
+        // },
 
-        /* ------------------------------------------------------- *
+        /* ------------------------------------------------------- */
 
         set: (password) => { // set runs before validate
             if (password.length < 5) {
@@ -75,8 +80,8 @@ const UserSchema = new Schema({
             }
         }
         /* ------------------------------------------------------- */
-        set: (password) => (password.length > 5 ? passwordEncrypt(password) : 'InvalidPassword'),
-        validate: (password) => password != 'InvalidPassword'
+        // set: (password) => (password.length >= 5 ? passwordEncrypt(password) : 'InvalidPassword'),
+        // validate: (password) => password != 'InvalidPassword'
 
     },
 

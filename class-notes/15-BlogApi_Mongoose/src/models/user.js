@@ -94,7 +94,7 @@ const UserSchema = new Schema({
     firstName: String,
     lastName: String,
 },{
-    collection:"user",
+    collection:"users",
     timestamps: true
 })
 
