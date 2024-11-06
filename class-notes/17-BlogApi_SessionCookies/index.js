@@ -3,7 +3,7 @@
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
-const User = require("./src/models/user");
+// const User = require("./src/models/user");
 const express = require("express");
 const app = express();
 
@@ -62,7 +62,7 @@ app.all('/', (req, res) => {
     res.send({
         msg: 'WELCOME TO BLOG API',
         session: req.session,
-        isLogin: req.user
+        isLogin: req.user ? true : false
     })
 })
 

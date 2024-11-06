@@ -28,7 +28,6 @@ const passwordEncrypt = require('../helpers/passwordEncrypt');
 
 // /* ------------------------------------------------------- */
 
-
 const UserSchema = new Schema({
 
     email: {

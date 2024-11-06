@@ -7,6 +7,7 @@ const User = require("../models/user")
 const passwordEncrypt = require('../helpers/passwordEncrypt');
 
 module.exports = {
+
     login: async(req, res) => {
 
         const {email, password} = req.body
@@ -27,7 +28,7 @@ module.exports = {
                     if (req.body.rememberMe == true) {
                         req.sessionOption.maxAge = 1000 * 60 * 60 *24 * 2 // 2 days
                     }
-                    res.status(202).send({
+                    res.send({
                         error: false,
                         msg: "Login success",
                     })

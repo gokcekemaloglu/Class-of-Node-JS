@@ -6,8 +6,6 @@ const User = require("../models/user");
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
-
-
 module.exports = async(req, res, next) => {
 
     req.user = null
