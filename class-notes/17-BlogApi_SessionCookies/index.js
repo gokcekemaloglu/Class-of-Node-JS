@@ -11,25 +11,38 @@ const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
 // Middlewares:
+
 app.use(express.json())
 require('express-async-errors')
 
+// session-cookies
+
+const session = require("cookie-session")
+app.use(session({
+    secret: process.env.KEY_CODE
+}))
 
 // DB connection:
 require('./src/configs/dbConnection')
 
-
 /* ------------------------------------------------------- */
 // Routes:
+
 app.all('/', (req, res) => {
-    res.send('WELCOME TO BLOG API')
+    // req.session.user = {name: "Gokce"}
+    // req.session = null
+    res.send({
+        msg: 'WELCOME TO BLOG API',
+        // session: req.session,
+        isLogin: req.session?.user ? true : false
+    })
 })
 
 app.use('/blog', require('./src/routes/blog'))
 app.use('/user',require('./src/routes/user'))
 app.use('/auth',require('./src/routes/auth'))
 
-
+/* ------------------------------------------------------- */
 // Catch Errors:
 app.use(require('./src/middlewares/errorHandler'))
 

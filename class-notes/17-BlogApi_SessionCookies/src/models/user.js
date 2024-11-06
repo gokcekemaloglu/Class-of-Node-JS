@@ -4,26 +4,30 @@
 ------------------------------------------------------- */
 
 const { Schema, model } = require('mongoose')
+const passwordEncrypt = require('../helpers/passwordEncrypt');
 
-/* ------------------------------------------------------- */
+// /* ------------------------------------------------------- */
 
-const crypto = require('node:crypto')
+// const crypto = require('node:crypto')
 
-// parameters
-const keyCode = '21yuifhsdkjfgisafisadhfsgawfhssvsfifashfusagfjsdga' // secretKey 
-const loopCount = 10_000 // number of loops
-const charCount = 32 // write 32 for 64
-const encType = 'sha512' // Type of algorithm
+// // parameters
+// const keyCode = '21yuifhsdkjfgisafisadhfsgawfhssvsfifashfusagfjsdga' // secretKey 
+// const loopCount = 10_000 // number of loops
+// const charCount = 32 // write 32 for 64
+// const encType = 'sha512' // Type of algorithm
 
-// const keyCode = process.env.KEY_CODE // secretKey 
-// const loopCount = Number(process.env.LOOP_COUNT) // number of loops
-// const charCount = Number(process.env.CHAR_COUNT) // write 32 for 64
-// const encType = process.env.ENC_TYPE // Type of algorithm
+// // const keyCode = process.env.KEY_CODE // secretKey 
+// // const loopCount = Number(process.env.LOOP_COUNT) // number of loops
+// // const charCount = Number(process.env.CHAR_COUNT) // write 32 for 64
+// // const encType = process.env.ENC_TYPE // Type of algorithm
 
-const passwordEncrypt = (password) => {
+// const passwordEncrypt = (password) => {
 
-    return crypto.pbkdf2Sync(password, keyCode, loopCount, charCount, encType).toString('hex')
-}
+//     return crypto.pbkdf2Sync(password, keyCode, loopCount, charCount, encType).toString('hex')
+// }
+
+// /* ------------------------------------------------------- */
+
 
 const UserSchema = new Schema({
 

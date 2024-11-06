@@ -55,6 +55,5 @@ module.exports = {
 
         if (deletedCount) res.sendStatus(204)
         else throw new Error("Something went wrong!")
-
     }
 }
