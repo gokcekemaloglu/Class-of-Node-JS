@@ -3,6 +3,7 @@
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
+const User = require("./src/models/user");
 const express = require("express");
 const app = express();
 
@@ -17,10 +18,37 @@ require('express-async-errors')
 
 // session-cookies
 
-const session = require("cookie-session")
+const session = require("cookie-session");
+
 app.use(session({
-    secret: process.env.KEY_CODE
+    secret: process.env.KEY_CODE,
+    // maxAge: 1000 * 60 * 60 *24 * 2 // 2 days
 }))
+
+// authentication middleware
+/* ------------------------------------------------------- */
+
+// const authentication = async(req, res, next) => {
+
+//     req.user = null
+
+//     if (req.session._id) {
+
+//         const user = await User.findById(req.session._id)
+
+//         if (user && user.password === req.session.password) {
+//             req.user = user
+//         } else {
+//             req.session = null
+//         }
+//     }
+//     next()
+// }
+
+// app.use(authentication)
+/* ------------------------------------------------------- */
+
+app.use(require("./src/middlewares/authentication"))
 
 // DB connection:
 require('./src/configs/dbConnection')
@@ -33,8 +61,8 @@ app.all('/', (req, res) => {
     // req.session = null
     res.send({
         msg: 'WELCOME TO BLOG API',
-        // session: req.session,
-        isLogin: req.session?.user ? true : false
+        session: req.session,
+        isLogin: req.user
     })
 })
 
