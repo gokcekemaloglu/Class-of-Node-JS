@@ -55,9 +55,7 @@ const UserSchema = new Schema({
         type: String,
         trim: true,
         required: true,
-
         /* ------------------------------------------------------- *
-
         set: (password) => { 1234 --> 331247687vd7345f3hds687234gdf76382532g3tvdf
             return 'customPassword'
         },
@@ -65,20 +63,18 @@ const UserSchema = new Schema({
             if (password.length < 5) return false
             else true
         },
-
         /* ------------------------------------------------------- */
-
         set: (password) => { // set runs before validate
             if (password.length < 5) {
                 // throw new Error('Invalid Password!') // Syntax Error
                 return 'InvalidPassword'
             } else {
-                console.log('line 76--',passwordEncrypt(password));
+                // console.log('line 76--',passwordEncrypt(password));
                 return passwordEncrypt(password)
             }
         },
         validate: (password) => {
-            console.log('line 81--', password)
+            // console.log('line 81--', password)
             if (password === 'InvalidPassword') {
                 return false
             } else {

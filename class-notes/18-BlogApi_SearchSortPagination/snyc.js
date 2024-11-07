@@ -1,3 +1,7 @@
+'use strict'
+/* -------------------------------------------------------
+    EXPRESSJS - BLOG Project with Mongoose
+------------------------------------------------------- */
 
 const User = require('./src/models/user')
 const { BlogCategory, BlogPost } = require('./src/models/blog')
