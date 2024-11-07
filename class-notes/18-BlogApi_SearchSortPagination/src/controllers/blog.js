@@ -12,6 +12,7 @@ module.exports.blogCategory = {
 
     list: async (req, res) => {
 
+        
         const result = await BlogCategory.find()
 
         res.status(200).send({
@@ -96,7 +97,18 @@ module.exports.blogPost = {
 
     list: async (req, res) => {
 
-        const result = await BlogPost.find()
+        // SEARCHING & FILTERING & SORTING & PAGINATION
+
+        // Filtering:
+        // URL?filter[fieldName1]value1&filter[fieldName2]=value2
+        const filter = req.query?.filter || {}
+        console.log(filter)
+        const result = await BlogPost.find(filter)
+        
+
+        // SELECT & POPULATE
+        // const result = await BlogPost.find({...filter}, {...select})
+        // const result = await BlogPost.find({}, {categoryId: true, title: true, content: true, _id: false}).populate("categoryId") // default _id: true
 
         res.status(200).send({
             error: false,
