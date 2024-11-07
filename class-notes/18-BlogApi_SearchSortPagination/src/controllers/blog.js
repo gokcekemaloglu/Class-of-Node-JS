@@ -97,66 +97,74 @@ module.exports.blogPost = {
 
     list: async (req, res) => {
 
-        // SEARCHING & FILTERING & SORTING & PAGINATION
+        // // SEARCHING & FILTERING & SORTING & PAGINATION
 
-        // console.log("line 101",req.query)
-        // Filtering:
-        // URL?filter[fieldName1]value1&filter[fieldName2]=value2
-        const filter = req.query?.filter || {}
+        // // console.log("line 101",req.query)
+        // // Filtering:
+        // // URL?filter[fieldName1]value1&filter[fieldName2]=value2
+        // const filter = req.query?.filter || {}
 
-        // Searching:
-        // URL?search[fieldName1]=value1&search[fieldName2]=value2
-        // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
-        // { "<field>": { "$regex": "pattern", "$options": "<options>" } }
+        // // Searching:
+        // // URL?search[fieldName1]=value1&search[fieldName2]=value2
+        // // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+        // // { "<field>": { "$regex": "pattern", "$options": "<options>" } }
 
-        const search = req.query?.search || {}
+        // const search = req.query?.search || {}
 
-        for (let key in search) // key bizim verdiğimiz değişkendi
-            search[key] = {$regex: search[key]} // assigning new value
-            // console.log(search[key])        
-            // console.log(search.title)        
-            // console.log(search["title"]) // static bir şekilde yazmıştık search[key] şeklinde yazarak dinamikleştiriyoruz
+        // for (let key in search) // key bizim verdiğimiz değişkendi
+        //     search[key] = {$regex: search[key]} // assigning new value
+        //     // console.log(search[key])        
+        //     // console.log(search.title)        
+        //     // console.log(search["title"]) // static bir şekilde yazmıştık search[key] şeklinde yazarak dinamikleştiriyoruz
 
-        console.log(search)
+        // console.log(search)
 
 
-        // Sorting:
-        // URL?sort[fieldName1]=asc&sort[fieldName2]=desc
+        // // Sorting:
+        // // URL?sort[fieldName1]=asc&sort[fieldName2]=desc
 
-        const sort = req.query.sort || {}
+        // const sort = req.query.sort || {}
 
-        // Pagination: MongoDBde pagination yok, limit ve skip var. 
-        // Limit:
-        let limit = Number(req.query?.limit)
-        limit = limit > 0 ? limit : Number(process.env.PAGE_SIZE)
-        // console.log(limit)
+        // // Pagination: MongoDBde pagination yok, limit ve skip var. 
+        // // Limit:
+        // let limit = Number(req.query?.limit)
+        // limit = limit > 0 ? limit : Number(process.env.PAGE_SIZE)
+        // // console.log(limit)
 
-        // Page: 
-        let page = Number(req.query?.page)
-        page = page > 0 ? page : 1
+        // // Page: 
+        // let page = Number(req.query?.page)
+        // page = page > 0 ? page : 1
 
-        // Skip:
-        let skip = Number(req.query?.skip)
-        skip = skip > 0 ? skip : ((page - 1) * limit)
-        // skip = (page - 1) * limit
-        console.log("limit--",limit)
-        console.log("skip--",skip)
-        console.log("page--",page)
+        // // Skip:
+        // let skip = Number(req.query?.skip)
+        // skip = skip > 0 ? skip : ((page - 1) * limit)
+        // // skip = (page - 1) * limit
+        // console.log("limit--",limit)
+        // console.log("skip--",skip)
+        // console.log("page--",page)
         
         
 
         
-        // const result = await BlogPost.find(filter)        
-        // const result = await BlogPost.find({...filter, ...search})
-        // const result = await BlogPost.find({...filter, ...search}).sort(sort)
-        const result = await BlogPost.find({...filter, ...search}).sort(sort).limit(limit)
+        // // const result = await BlogPost.find(filter)        
+        // // const result = await BlogPost.find({...filter, ...search})
+        // // const result = await BlogPost.find({...filter, ...search}).sort(sort)
+        // const result = await BlogPost.find({...filter, ...search}).sort(sort).limit(limit)
+
+/* ------------------------------------------------------- */
+
 
         // SELECT & POPULATE
         // const result = await BlogPost.find({...filter}, {...select})
         // const result = await BlogPost.find({}, {categoryId: true, title: true, content: true, _id: false}).populate("categoryId") // default _id: true
 
+        // const result = await BlogPost.find({...filter}, {...select})
+
+        const result = await res.getModelList(BlogPost,"categoryId")
+
         res.status(200).send({
             error: false,
+            details: await res.getModelListDetails(BlogPost),
             result
         })
     },
