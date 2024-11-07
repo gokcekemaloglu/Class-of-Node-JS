@@ -21,6 +21,7 @@ module.exports.blogCategory = {
     },
 
     create: async (req, res) => {
+        
 
         const result = await BlogCategory.create(req.body)
 
@@ -108,6 +109,7 @@ module.exports.blogPost = {
         req.body.userId = req.user._id
 
         const result = await BlogPost.create(req.body)
+
 
         res.status(201).send({
             error: false,
