@@ -23,6 +23,10 @@ const session = require('cookie-session');
 
 app.use(session({
     secret: process.env.SECRET_KEY,
+    // cookie: {
+    //     secure: true, // default false
+    //     httpOnly: true // default false
+    // }
 }))
 
 
@@ -42,6 +46,8 @@ app.all('/', (req, res) => {
 
     res.send({
         message: 'WELCOME TO PERSONNEL API',
+        isLogin: req.session.id ? true : false,
+        session: req.session
     })
 })
 
@@ -49,6 +55,8 @@ app.all('/', (req, res) => {
 app.use("/departments", require("./src/routes/department"))
 // personnel
 app.use("/personnels", require("./src/routes/personnel"))
+// auth
+app.use("/auth", require("./src/routes/auth"))
 
 // Not Found
 app.use("*", (req, res)=>{

@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    EXPRESSJS - BLOG Project with Mongoose
+    EXPRESSJS - Personnel API
 ------------------------------------------------------- */
 
 const router = require('express').Router()
