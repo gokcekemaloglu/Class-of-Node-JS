@@ -62,4 +62,16 @@ module.exports = {
         });
     },
 
+    personnels: async (req, res) => {
+        const Personnel = require("../models/personnel")
+
+        // const result = await Personnel.find({departmentId: req.params.id}).populate("departmentId")
+        const result = await res.getModelList(Personnel, {departmentId: req.params.id}, "departmentId")
+
+        res.status(202).send({
+            error: false,
+            result
+        })
+    }
+
 };
