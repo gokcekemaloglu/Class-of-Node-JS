@@ -52,7 +52,7 @@ module.exports = async (req, res, next) => {
 
     res.getModelListDetails = async (Model) => {
 
-        const data = Model.find({ ...filter, ...search })
+        const data = await Model.find({ ...filter, ...search })
 
         const details = {
             filter: filter,
@@ -75,8 +75,6 @@ module.exports = async (req, res, next) => {
         return details
 
     }
-
-
 
     next()
 }
