@@ -13,7 +13,6 @@ module.exports = {
 
         if (email && password) {
 
-
             const user = await Personnel.findOne({ email })
 
             if (user) {
@@ -35,15 +34,13 @@ module.exports = {
 
                 } else {
                     res.errorStatusCode = 401
-                    throw new Error('Wrong Email or Password!')
+                    throw new Error('Wrong Email or Password!') // 'Wrong Password!'
                 }
 
             } else {
                 res.errorStatusCode = 401
                 throw new Error('Wrong Email or Password!')
             }
-
-
 
         } else {
             res.errorStatusCode = 401
