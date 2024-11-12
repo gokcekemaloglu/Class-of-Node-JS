@@ -20,14 +20,13 @@ require('express-async-errors')
 
 // Session-Cookies
 const session = require('cookie-session');
-
 app.use(session({
     secret: process.env.SECRET_KEY,
-    // cookie: {
-    //     secure: true, // default false
-    //     httpOnly: true // default false
-    // }
+    // secure: true, //  only sent over HTTPS
+    // httpOnly: true // not accessible via JavaScript
 }))
+
+
 
 // Query Handler
 app.use(require('./src/middlewares/queryHandler'))
@@ -39,9 +38,8 @@ require('./src/configs/dbConnection')
 /* ------------------------------------------------------- */
 // Routes:
 
-// main
+// main 
 app.all('/', (req, res) => {
-
     res.send({
         message: 'WELCOME TO PERSONNEL API',
         isLogin: req.session.id ? true : false,
@@ -50,19 +48,21 @@ app.all('/', (req, res) => {
 })
 
 // department
-app.use("/departments", require("./src/routes/department"))
+app.use('/departments', require('./src/routes/department'))
 // personnel
-app.use("/personnels", require("./src/routes/personnel"))
+app.use('/personnels', require('./src/routes/personnel'))
 // auth
-app.use("/auth", require("./src/routes/auth"))
+app.use('/auth', require('./src/routes/auth'))
 
 // Not Found
-app.use("*", (req, res)=>{
+app.use('*', (req, res) => {
+
     res.status(404).send({
         error: true,
-        message:" This route is not found!"
+        message: "This route is not found !"
     })
 })
+
 
 
 // errorHandler:
