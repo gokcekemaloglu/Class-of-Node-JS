@@ -19,7 +19,7 @@ module.exports = {
 
     create: async (req, res) => {
 
-        // todo check if there is a lead, if it is there, make old user lead field 
+        //todo check if there is a lead, if it is there make old user lead fieldname false  
         const result = await Department.create(req.body);
         res.status(201).send({
             error: false,

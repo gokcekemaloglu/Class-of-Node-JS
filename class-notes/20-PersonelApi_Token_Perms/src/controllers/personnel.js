@@ -54,4 +54,6 @@ module.exports = {
         });
     },
 
+    //todo multi delete
+
 };
