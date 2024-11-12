@@ -6,8 +6,11 @@ const router = require('express').Router()
 /* ------------------------------------------------------- */
 
 const { list, create, read, update, delete: deleteToken } = require('../controllers/token')
+const {isAdmin} = require("../middlewares/permissions")
 
 // URL : /token
+
+router.use(isAdmin) // this is router middleare, it runs before every method
 
 router.route('/')
     .get(list)

@@ -9,8 +9,8 @@ const Token = require("../models/token")
 /* ------------------------------------------------------- */
 
 //session
-// module.exports = {
 
+// module.exports = {
 //     login: async (req, res) => {
 
 //         const { email, password } = req.body
@@ -50,7 +50,6 @@ const Token = require("../models/token")
 //             res.errorStatusCode = 401
 //             throw new Error('Please enter email and password.')
 //         }
-
 //     },
 
 //     logout: async (req, res) => {
@@ -61,7 +60,6 @@ const Token = require("../models/token")
 //             message: 'Logout is completed.'
 //         })
 //     },
-
 // }
 
 /* ------------------------------------------------------- */
@@ -77,10 +75,12 @@ module.exports = {
                 if (user.isActive) {
                     /* TOKEN */
                     let tokenData = await Token.findOne({userId: user._id})
+                    console.log(tokenData)
+                    
 
                     if (!tokenData) {
                         tokenData = Token.create({
-                            userId:user._id,
+                            userId: user._id,
                             token: passwordEncrypt(user._id + Date.now())
                         })
                     }                    
@@ -105,5 +105,15 @@ module.exports = {
             throw new Error("Please enter username and password")
         }
     },
-    logout: async(req, res) => {},
+    logout: async(req, res) => {
+        console.log(req.user);
+
+        const data = req.user ? await Token.deleteOne({userId: req.user._id}) : null
+        
+        res.status(200).send({
+            error: false,
+            message: "Logout success",
+            data
+        })
+    },
 }

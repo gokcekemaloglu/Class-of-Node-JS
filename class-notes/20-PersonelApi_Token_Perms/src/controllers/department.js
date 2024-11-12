@@ -18,6 +18,8 @@ module.exports = {
     },
 
     create: async (req, res) => {
+
+        // todo check if there is a lead, if it is there, make old user lead field 
         const result = await Department.create(req.body);
         res.status(201).send({
             error: false,
@@ -55,6 +57,9 @@ module.exports = {
     },
 
     delete: async (req, res) => {
+
+        // todo check if there is deleted assign new lead to this department
+
         const result = await Department.deleteOne({ _id: req.params.id });
         res.status(result.deletedCount ? 204 : 404).send({
             error: !result.deletedCount,
@@ -76,5 +81,6 @@ module.exports = {
 
     }
 
+    // todo multi delete
 
 };

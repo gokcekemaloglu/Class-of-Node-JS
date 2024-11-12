@@ -7,6 +7,9 @@ const router = require('express').Router()
 
 const { list, create, read, update, delete: deletePersonnel } = require('../controllers/personnel')
 
+router.use(isAdmin) // this is router middleare, it runs before every method
+
+
 // URL : /personnels
 
 router.route('/')
