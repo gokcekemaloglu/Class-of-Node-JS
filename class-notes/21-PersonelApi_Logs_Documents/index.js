@@ -27,8 +27,13 @@ app.use(session({
     // httpOnly: true // not accessible via JavaScript
 }))
 
+/* ------------------------------------------------------- */
+// LOGGER
+// npm i morgan
+// https://expressjs.com/en/resources/middleware/morgan.html
+
 // Morgan 
-const morgan = require("morgan")
+// const morgan = require("morgan")
 
 // app.use(morgan("tiny"))
 // app.use(morgan("short"))
@@ -40,10 +45,29 @@ const morgan = require("morgan")
 
 // Write to File
 
-const fs = require("node:fs")
-app.use(morgan("combined", {
-    stream: fs.createWriteStream("./access.log", {flags: "a+"})
-}))
+// const fs = require("node:fs")
+// app.use(morgan("combined", {
+//     stream: fs.createWriteStream("./access.log", {flags: "a+"})
+// }))
+
+// Write to File - Day to Day
+// const fs = require("node:fs")
+// const now = new Date()
+// console.log(now);
+// console.log(typeof now);
+
+// const today = now.toISOString().split("T")[0]
+// console.log(today);
+
+// app.use(morgan("combined", {
+//     stream: fs.createWriteStream(`./logs/${today}.log`, {flags: "a+"})
+// }))
+
+
+/* ------------------------------------------------------- */
+
+//Morgan Logger
+app.use(require("./src/middlewares/logger"))
 
 // Authentication
 app.use(require('./src/middlewares/authentication'))
