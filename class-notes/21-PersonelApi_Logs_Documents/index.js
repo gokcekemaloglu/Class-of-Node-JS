@@ -72,6 +72,31 @@ app.use(session({
 //     stream: fs.createWriteStream(`./logs/${today}.log`, {flags: "a+"})
 // }))
 
+// JSON
+
+
+
+/* ------------------------------------------------------- */
+// JSON:
+app.use('/documents/json', (req, res) => {
+    res.sendFile('swagger.json', { root: '.' })
+})
+
+
+// Swagger
+const swaggerUi = require('swagger-ui-express')
+const swaggerJson = require('./swagger.json')
+
+app.use('/documents/swagger', swaggerUi.serve, swaggerUi.setup(swaggerJson, {
+    swaggerOptions: { persistAuthorization: true }
+}))
+
+// Redoc
+const redoc = require('redoc-express')
+app.use('/documents/redoc', redoc({ specUrl: '/documents/json', title:'Redoc UI' }))
+
+
+
 /* ------------------------------------------------------- */
 
 //Morgan Logger

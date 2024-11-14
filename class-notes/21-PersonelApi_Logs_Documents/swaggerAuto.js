@@ -31,7 +31,7 @@ const swaggerAutogen = require('swagger-autogen')()
 
 const packageJson = require('./package.json')
 
-const doucments = {
+const documents = {
     // info: {
     //     version: '1.0.0',
     //     title: 'Personnel API',
@@ -62,7 +62,7 @@ const doucments = {
     },
     security: [
         { Token: [] }
-    ], 
+    ],
     // Model Definitions:
     definitions: {
         "Department": require('./src/models/department').schema.obj,
@@ -71,9 +71,9 @@ const doucments = {
 
 }
 
-//* RUN 
+const outputFile = './swagger.json'
+const routes = ['./index.js']
 
-// swaggerAutogen("outputFile", "routes", "document")
-
-
-
+// RUN
+// swaggerAutogen('file address', 'routes', 'document')
+swaggerAutogen(outputFile, routes, documents) // swaggerAutgen create a json file for us
