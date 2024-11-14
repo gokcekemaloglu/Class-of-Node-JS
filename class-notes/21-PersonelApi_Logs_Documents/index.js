@@ -28,6 +28,15 @@ app.use(session({
 }))
 
 /* ------------------------------------------------------- */
+// DOCUMENTATION
+// https://swagger-autogen.github.io/docs/
+
+// $ npm i swagger-autogen // json  CREATOR
+// $ npm i swagger-ui-express
+// $ npm i redoc-express
+
+
+/* ------------------------------------------------------- */
 // LOGGER
 // npm i morgan
 // https://expressjs.com/en/resources/middleware/morgan.html
@@ -62,7 +71,6 @@ app.use(session({
 // app.use(morgan("combined", {
 //     stream: fs.createWriteStream(`./logs/${today}.log`, {flags: "a+"})
 // }))
-
 
 /* ------------------------------------------------------- */
 
