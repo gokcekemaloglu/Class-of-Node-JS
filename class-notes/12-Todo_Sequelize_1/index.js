@@ -30,7 +30,7 @@ const sequelize = new Sequelize(`${DB_NAME}:${DB_PATH}`)
 
 
 //* Creating model
-// sequelize.define("todos", {attributes})
+// sequelize.define("modelName", {attributes/fields})
 
 const Todo = sequelize.define("todos", {
     // id:{  //* this attribute automatically created in sequelize
@@ -51,7 +51,7 @@ const Todo = sequelize.define("todos", {
     //     type: DataTypes.TEXT
     // },
     description: DataTypes.TEXT, // tek satır olduğundan diğer kısımları kaldırıyoruz
-    priority: { // -1: low, 0: Normal, 1: High
+    priority: { // -1: low, 0: Normal, 1: High // integer
         type: DataTypes.TINYINT,
         allowNull: false,
         defaultValue: 0
@@ -66,13 +66,11 @@ const Todo = sequelize.define("todos", {
 })
 
 //! sync - JUST EXECUTE ONCE // Databesi bir kere çalıştırarark tanıtıyoruz
-// sequelize.sync() // executing model
+// sequelize.sync() // executing model // tabloyu oluşturur // modeldeki değişikliği algılamıyor
 // sequelize.sync({force: true}) //* DROP TABLE & CREATE TABLE; executing model and deleting existing table if exists
 // sequelize.sync({alter: true}) //! to BACKUP & DROP TABLE & CREATE TABLE from Backup
 
-
-
-
+/* ------------------------------------------------------- */
 // Connecting to DB
 sequelize.authenticate()
     .then(()=>console.log("*DB Connected*"))
@@ -94,7 +92,7 @@ router.get("/todo", async(req, res) => {
 
     res.status(200).send({
         error: false,
-        result
+        result // içinde count ve row döndürüyor
     })
 })
 
@@ -155,12 +153,7 @@ router.post("/todo", async(req, res) => {
 //     }
 // });
 
-app.use(router)
-
-
-
-
-
+app.use(router) // çalıştımak için bu komutu veriyoruz
 
 /* ------------------------------------------------------- */
 

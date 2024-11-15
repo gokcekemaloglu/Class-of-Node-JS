@@ -128,7 +128,7 @@ router.get('/todo/:id', async (req, res) => {
 
 })
 
-// Updata Todo
+// Update Todo
 router.put('/todo/:id', async (req, res) => {
 
     // const result = await Todo.update({...newData},{...filter})
@@ -143,13 +143,11 @@ router.put('/todo/:id', async (req, res) => {
     })
 })
 
-
 // Delete Todo
 
 router.delete('/todo/:id', async (req, res) => {
 
     const isDeleted = await Todo.destroy({ where: { id: req.params.id } })
-
 
     if (isDeleted) {
         res.sendStatus(204)
