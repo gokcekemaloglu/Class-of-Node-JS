@@ -107,7 +107,7 @@ const HOST = process.env.HOST || "127.0.0.1"
 // console.log(__dirname);
 // app.get('/show',(req,res)=>{ res.sendFile(__dirname + '/app.js')}) // tam dosya yolu lazım // browserda app.js dosyasında ne var ne yok gösteriyor
 
-//?redirect 301 or 302 // sayfayı yönlenrime( şu pata istek atıldığında sayfayı yönlendirsin)
+//?redirect 301 or 302 // sayfayı yönlendrime( şu path'a istek atıldığında sayfayı yönlendirsin)
 // app.get('/kalici',(req,res)=>{ res.redirect(301,'https://www.clarusway.com')}) // yonlendirmeyi cash e kaydeder
 // 127.0.0.1:8000/kalici
 // app.get('/gecici',(req,res)=>{ res.redirect (302,'https://clarusway.com/courses/')})

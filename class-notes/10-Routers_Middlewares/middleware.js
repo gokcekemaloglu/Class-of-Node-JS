@@ -142,6 +142,8 @@ const HOST=process.env.HOST || '127.0.0.1'
 
 // app.use(middleware2, middleware1) // burada önce middlewarelere geldi ondan sonra get çalıştı
 
+//? Yol belirtirsek; 
+
 // app.get("/",(req, res, next)=>{
 //     console.log("get");
     

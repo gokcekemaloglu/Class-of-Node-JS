@@ -26,7 +26,7 @@ const PORT = process.env.PORT || 8000;
 
 //     if (isNaN(id)) {
 //         // res.errorStatusCode = 400
-//         throw new Error("ID is not a number", {cause: "The Error uccured at params. (hata paramsdan gelen id'den oluştu")})
+//         throw new Error("ID is not a number", {cause: "The Error uccured at params. (hata paramsdan gelen id'den oluştu)"})
 //     } else {
 //         res.send({
 //             error: false,
