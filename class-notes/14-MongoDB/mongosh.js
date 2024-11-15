@@ -23,7 +23,7 @@
 
 
 	/* Collections (Tables) */
-	// mongodb.com/docs/manual/reference/method/js-collection/
+	// https://www.mongodb.com/docs/manual/reference/method/js-collection/  // web page
 	show('collections') // show collections // show tables
 	db.getCollectionNames() // List by array.
 	db.getCollectionInfos() // List by array with details.
