@@ -35,7 +35,6 @@ app.use(session({
 // $ npm i swagger-ui-express
 // $ npm i redoc-express
 
-
 /* ------------------------------------------------------- */
 // LOGGER
 // npm i morgan
@@ -73,10 +72,8 @@ app.use(session({
 // }))
 
 // JSON
-
-
-
 /* ------------------------------------------------------- */
+
 // JSON:
 app.use('/documents/json', (req, res) => {
     res.sendFile('swagger.json', { root: '.' })
