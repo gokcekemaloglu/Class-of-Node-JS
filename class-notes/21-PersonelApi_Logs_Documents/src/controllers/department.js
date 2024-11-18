@@ -99,7 +99,7 @@ module.exports = {
         });
     },
 
-    delete: async (req, res) => {
+    deleteDepartment: async (req, res) => {
 
         //todo if a lead is deleted assign new lead to this department
         /*
