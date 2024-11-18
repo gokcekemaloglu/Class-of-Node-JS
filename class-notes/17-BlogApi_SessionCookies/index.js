@@ -47,7 +47,7 @@ app.use(session({
 
 // app.use(authentication)
 /* ------------------------------------------------------- */
-
+// Authentication:
 app.use(require("./src/middlewares/authentication"))
 
 // DB connection:

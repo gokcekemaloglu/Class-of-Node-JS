@@ -12,7 +12,7 @@ module.exports = {
 
         const {email, password} = req.body
 
-        if (email && password) { // checking emial and password
+        if (email && password) { // checking email and password
 
             const user = await User.findOne({email: email})
 
