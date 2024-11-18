@@ -78,15 +78,15 @@ module.exports = {
 
     update: async (req, res) => {
         /*
-            #swagger.tags = ["Departments"]
-            #swagger.summary = "Update Department"
-            #swagger.parameters['body'] = {
-                in: 'body',
-                required: true,
-                schema: {
-                    $ref: '#/definitions/Department'
-                }
+        #swagger.tags = ["Departments"]
+        #swagger.summary = "Update Department"
+        #swagger.parameters['body'] = {
+            in: 'body',
+            required: true,
+            schema: {
+                $ref: '#/definitions/Department'
             }
+        }
         */
         const result = await Department.updateOne({ _id: req.params.id }, req.body, {
             runValidators: true,
@@ -104,17 +104,9 @@ module.exports = {
         //todo if a lead is deleted assign new lead to this department
         /*
         #swagger.tags = ["Departments"]
-        #swagger.summary = "List Departments"
-        #swagger.description = `
-            You can send query with endpoint for search[], sort[], page and limit.
-            <ul> Examples:
-                <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>
-                <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>
-                <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>
-                <li>URL/?<b>page=2&limit=1</b></li>
-            </ul>
-        `
+        #swagger.summary = "Delete Department"
         */
+
 
         const result = await Department.deleteOne({ _id: req.params.id });
 
@@ -125,6 +117,10 @@ module.exports = {
     },
 
     personnels: async (req, res) => {
+        /*
+        #swagger.tags = ["Departments"]
+        #swagger.summary = "Get Personnels of Department"
+        */
         const Personnel = require('../models/personnel')
 
         // const result = await Personnel.find({ departmentId: req.params.id }).populate('departmentId')

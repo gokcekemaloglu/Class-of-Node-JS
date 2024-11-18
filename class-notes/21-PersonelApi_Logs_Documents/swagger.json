@@ -358,6 +358,10 @@
     },
     "/departments/{id}/personnels": {
       "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Get Personnels of Department",
         "description": "",
         "parameters": [
           {
@@ -789,7 +793,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1731919542289
+              "example": 1731920156267
             }
           }
         }
