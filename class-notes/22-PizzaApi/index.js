@@ -69,6 +69,8 @@ app.use("/users", require("./src/routes/user"))
 app.use('/auth', require('./src/routes/auth'))
 // Tokens
 app.use("/tokens", require("./src/routes/token"))
+// Toppings:
+app.use('/toppings', require('./src/routes/topping'))
 
 /* ------------------------------------------------------- */
 
