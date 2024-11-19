@@ -13,7 +13,7 @@ const PizzaSchema = new mongoose.Schema(
             required: true,
             unique: true,
             set: (name) => name.toUpperCase()
-      },
+        },
 
         // image: {
         //     type: String,
