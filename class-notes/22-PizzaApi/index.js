@@ -63,7 +63,7 @@ app.all('/', (req, res) => {
     })
 })
 
-app.use("/user", require("./src/routes/user"))
+app.use("/users", require("./src/routes/user"))
 
 /* ------------------------------------------------------- */
 
