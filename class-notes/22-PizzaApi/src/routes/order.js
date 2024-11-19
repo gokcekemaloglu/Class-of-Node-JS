@@ -9,7 +9,6 @@ const { list, create, read, update, deleteOrder } = require('../controllers/orde
 
 // URL: /orders
 
-
 router.route('/').get(list).post(create)
 
 router.route('/:id').get(read).put(update).patch(update).delete(deleteOrder)
