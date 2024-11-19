@@ -71,6 +71,8 @@ app.use('/auth', require('./src/routes/auth'))
 app.use("/tokens", require("./src/routes/token"))
 // Toppings:
 app.use('/toppings', require('./src/routes/topping'))
+// Pizza:
+app.use('/pizzas', require('./src/routes/pizza'))
 
 /* ------------------------------------------------------- */
 
