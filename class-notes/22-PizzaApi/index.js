@@ -73,6 +73,9 @@ app.use("/tokens", require("./src/routes/token"))
 app.use('/toppings', require('./src/routes/topping'))
 // Pizza:
 app.use('/pizzas', require('./src/routes/pizza'))
+app.use('/pizzas', require('./src/routes/pizza'))
+// Order:
+app.use('/orders', require('./src/routes/order'))
 
 /* ------------------------------------------------------- */
 
