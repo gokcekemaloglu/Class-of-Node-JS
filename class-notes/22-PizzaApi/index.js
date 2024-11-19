@@ -63,7 +63,10 @@ app.all('/', (req, res) => {
     })
 })
 
+// Users
 app.use("/users", require("./src/routes/user"))
+// Tokens
+app.use("/tokens", require("./src/routes/token"))
 
 /* ------------------------------------------------------- */
 
