@@ -2,7 +2,7 @@
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
-
+const Token = require("../models/token")
 module.exports = {
     list: async (req, res) => {
       /*
