@@ -6,6 +6,7 @@
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 const User = require("../models/user");
 const Token = require('../models/token')
+const jwt = require("jsonwebtoken")
 
 module.exports = {
 
@@ -43,6 +44,8 @@ module.exports = {
             throw new Error("This account is not active.");
         }
 
+        /* SimpleToken */
+
         let tokenData = await Token.findOne({ userId: user._id });
 
         if (!tokenData) {
@@ -51,11 +54,46 @@ module.exports = {
                 token: passwordEncrypt(user._id + Date.now()),
             });
         }
+        /* SimpleToken */
+
+        /**  JWT **/
+
+        // Access Token
+        // const {_id, userName, email, isActive, isAdmin} = user
+        const accessData = {
+            _id: user._id,
+            userName: user.userName,
+            email: user.email,
+            isActive: user.isActive,
+            isAdmin: user.isAdmin
+        }
+
+        // Convert to JWT
+        // jwt.sign(payload, key, {expireIn: 3m})
+        const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, {expiresIn: "30m"})
+
+        // Refresh Token
+        // const {_id, userName, email, isActive, isAdmin} = user
+        const refreshData = {
+            _id: user._id,
+            password: user.password
+        }
+
+        // Convert to JWT
+        // jwt.sign(payload, key, {expireIn: 3m})
+        const refreshToken = jwt.sign(refreshData, process.env.REFRESH_KEY, {expiresIn: "1d"})
+
+
+        /* JWT */
 
         res.send({
             error: false,
             token: tokenData.token,
-            user,
+            bearer: {
+                access: accessToken,
+                refresh: refreshToken
+            },
+            user
         });
 
 
