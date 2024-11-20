@@ -99,6 +99,52 @@ module.exports = {
 
 
     },
+    refresh: async (req, res) => {
+        /*
+            #swagger.tags = ["Authentication"]
+            #swagger.summary = "Refresh"
+            #swagger.description = 'Refresh with refreshToken for get accessToken'
+            #swagger.parameters["body"] = {
+                in: "body",
+                required: true,
+                schema: {
+                    "bearer": {
+                        refresh: '...refresh_token...'
+                    }
+                }
+            }
+        */
+       const refreshToken = req.body?.bearer?.refresh; // içinde id ve password var
+       if (!refreshToken) {
+        res.errorStatusCode = 401
+        throw new Error("Please enter bearer.refresh")
+       }
+
+       const refreshData = await jwt.verify(refreshToken, process.env.REFRESH_KEY)
+       if(!refreshData) {
+        res.errorStatusCode = 401
+        throw new Error("JWT refresh Token is wrong")
+       }
+
+       const user = await User.findOne({_id: refreshData._id})
+       if (!(user && user.password == refreshData.password)) {
+        res.errorStatusCode = 401
+        throw new Error("Wrong id or password")
+       }
+
+       if (!user.isActive) {
+        res.errorStatusCode = 401
+        throw new Error("This account is not active")
+       }
+
+       res.status(200).send({
+        error: false,
+        bearer: {
+            access: jwt.sign(user, process.env.ACCESS_KEY, { expiresIn: '30m' })
+        }
+       })
+
+    },
     logout: async (req, res) => {
        /*
             #swagger.tags = ["Authentication"]
@@ -108,13 +154,22 @@ module.exports = {
 
         const auth = req.headers?.authorization; //"Token fgdgfhg623gjhbksj"
         const tokenKey = auth ? auth.split(" ") : null; // [ "Token", tokenKey]
-        const result = await Token.deleteOne({ token: tokenKey[1] });
+        if (tokenKey[0] == "Token") {
+            const result = await Token.deleteOne({ token: tokenKey[1] })
+            res.send({
+                error: false,
+                message: 'Token deleted.',
+                result
+            })
+        } else if (tokenKey[0] == "Bearer") {
+            res.send({
+                error: false,
+                message: 'JWT: No need any process for logout. You cen delete Tokens'
+            })
+        }
+        
 
-        res.send({
-            error: false,
-            message: 'Token deleted.',
-            result
-        })
+        
 
     },
 }

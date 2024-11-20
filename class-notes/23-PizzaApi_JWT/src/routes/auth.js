@@ -5,10 +5,11 @@
 const router = require('express').Router()
 /* ------------------------------------------------------- */
 
-const { login, logout } = require('../controllers/auth')
+const { login, logout, refresh } = require('../controllers/auth')
 
 // /auth
 router.post('/login', login)
+router.get('/refresh', refresh)
 router.get('/logout', logout)
 
 /* ------------------------------------------------------- */

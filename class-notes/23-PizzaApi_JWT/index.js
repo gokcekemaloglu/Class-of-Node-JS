@@ -59,6 +59,8 @@ app.use(require('./src/middlewares/queryHandler'))
 /* ------------------------------------------------------- */
 // Routes:
 
+app.use("/", require("./src/routes"))
+
 // HomePath:
 app.all('/', (req, res) => {
     res.send({
@@ -73,20 +75,6 @@ app.all('/', (req, res) => {
     })
 })
 
-// Auth:
-app.use('/auth', require('./src/routes/auth'))
-// Tokens:
-app.use('/tokens', require('./src/routes/token'))
-// Users:
-app.use('/users', require('./src/routes/user'))
-// Toppings:
-app.use('/toppings', require('./src/routes/topping'))
-// Pizza:
-app.use('/pizzas', require('./src/routes/pizza'))
-// Order:
-app.use('/orders', require('./src/routes/order'))
-// Documents:
-app.use('/documents', require('./src/routes/document'))
 
 /* ------------------------------------------------------- */
 
