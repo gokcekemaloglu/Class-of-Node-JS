@@ -23,16 +23,6 @@ const PORT = process.env?.PORT || 8000
 // asyncErrors to errorHandler:
 require('express-async-errors')
 
-// Cors:
-// const cors = require('cors')
-// const defaultCorsOptions = {
-//     origin: "*",
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     preflightContinue: false,
-//     optionsSuccessStatus: 204
-// }
-// app.use(cors())
-
 /* ------------------------------------------------------- */
 // Configrations:
 
@@ -43,13 +33,13 @@ dbConnection()
 /* ------------------------------------------------------- */
 // Middlewares:
 
-// Parse JSON:
+// Accept JSON:
 app.use(express.json())
 
 // Logger:
 app.use(require('./src/middlewares/logger'))
 
-// Auhentication: (JWT)
+// Auhentication:
 // app.use(require('./src/middlewares/authentication'))
 
 // findSearchSortPage / res.getModelList:
@@ -58,6 +48,8 @@ app.use(require('./src/middlewares/queryHandler'))
 /* ------------------------------------------------------- */
 // Routes:
 
+// routes/index.js:
+app.use('/', require('./src/routes/'))
 
 // HomePath:
 app.all('/', (req, res) => {
@@ -72,22 +64,6 @@ app.all('/', (req, res) => {
         user: req.user,
     })
 })
-
-// Users
-app.use("/users", require("./src/routes/user"))
-// Auth:
-app.use('/auth', require('./src/routes/auth'))
-// Tokens
-app.use("/tokens", require("./src/routes/token"))
-// Toppings:
-app.use('/toppings', require('./src/routes/topping'))
-// Pizza:
-app.use('/pizzas', require('./src/routes/pizza'))
-app.use('/pizzas', require('./src/routes/pizza'))
-// Order:
-app.use('/orders', require('./src/routes/order'))
-// Documents:
-// app.use('/documents', require('./src/routes/document'))
 
 /* ------------------------------------------------------- */
 

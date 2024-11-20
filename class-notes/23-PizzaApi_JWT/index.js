@@ -10,6 +10,7 @@
     $ mkdir logs
     $ nodemon
 */
+
 const express = require('express')
 const app = express()
 
@@ -23,22 +24,22 @@ const PORT = process.env?.PORT || 8000
 // asyncErrors to errorHandler:
 require('express-async-errors')
 
-// Cors:
-// const cors = require('cors')
-// const defaultCorsOptions = {
-//     origin: "*",
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     preflightContinue: false,
-//     optionsSuccessStatus: 204
-// }
-// app.use(cors())
-
 /* ------------------------------------------------------- */
 // Configrations:
 
 // Connect to DB:
 const { dbConnection } = require('./src/configs/dbConnection')
 dbConnection()
+
+/* // Cross-origin resource sharing (CORS): $ npm i cors
+const cors = require('cors')
+const defaultCorsOptions = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+}
+app.use(cors()) */
 
 /* ------------------------------------------------------- */
 // Middlewares:
@@ -49,15 +50,14 @@ app.use(express.json())
 // Logger:
 app.use(require('./src/middlewares/logger'))
 
-// Auhentication: (JWT)
-// app.use(require('./src/middlewares/authentication'))
+// Auhentication: (JWT & Simple Token)
+app.use(require('./src/middlewares/authentication'))
 
 // findSearchSortPage / res.getModelList:
 app.use(require('./src/middlewares/queryHandler'))
 
 /* ------------------------------------------------------- */
 // Routes:
-
 
 // HomePath:
 app.all('/', (req, res) => {
@@ -73,21 +73,20 @@ app.all('/', (req, res) => {
     })
 })
 
-// Users
-app.use("/users", require("./src/routes/user"))
 // Auth:
 app.use('/auth', require('./src/routes/auth'))
-// Tokens
-app.use("/tokens", require("./src/routes/token"))
+// Tokens:
+app.use('/tokens', require('./src/routes/token'))
+// Users:
+app.use('/users', require('./src/routes/user'))
 // Toppings:
 app.use('/toppings', require('./src/routes/topping'))
 // Pizza:
 app.use('/pizzas', require('./src/routes/pizza'))
-app.use('/pizzas', require('./src/routes/pizza'))
 // Order:
 app.use('/orders', require('./src/routes/order'))
 // Documents:
-// app.use('/documents', require('./src/routes/document'))
+app.use('/documents', require('./src/routes/document'))
 
 /* ------------------------------------------------------- */
 
