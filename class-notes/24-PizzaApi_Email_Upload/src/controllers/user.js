@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 
 const User = require('../models/user')
+const SendMail = require("../helpers/sendMail")
 
 module.exports = {
 
@@ -42,6 +43,15 @@ module.exports = {
         }
 
         const result = await User.create(req.body);
+
+        SendMail(
+            result.email, 
+            `Welcome ${result.userName} to DE09 Pizza Shop `, 
+            `
+                <h1>Welcome ${result.userName}</h1>
+                <h2>We are happy to work with you :)</h2>
+            `
+        )
 
         res.status(200).send({
             error: false,

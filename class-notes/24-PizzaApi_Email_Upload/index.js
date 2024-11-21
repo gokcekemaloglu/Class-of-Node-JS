@@ -62,7 +62,7 @@ app.use(require('./src/middlewares/queryHandler'))
 // https://www.nodemailer.com/
 // npm i nodemailer
 
-const nodemailer = require("nodemailer")
+// const nodemailer = require("nodemailer")
 
 // Create Test Account
 
@@ -165,6 +165,10 @@ app.all('/', (req, res) => {
         },
     })
 })
+
+// Static File: 
+
+app.use("/images", express.static("./uploads"))
 
 /* ------------------------------------------------------- */
 

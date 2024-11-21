@@ -10,14 +10,14 @@
 
 const nodemailer = require("nodemailer");
 
-module.export = function (to, subject, message) {
+module.exports = function (to, subject, message) {
   //* GoogleMail (gmail)
   //* Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "gokce.kemaloglu@gmail.com",
-      pass: "your_password",
+        user: "alidrl26@gmail.com",
+        pass: 'vbyt klrm hehd xubl'
     },
   });
 
