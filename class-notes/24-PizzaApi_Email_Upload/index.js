@@ -31,15 +31,17 @@ require('express-async-errors')
 const { dbConnection } = require('./src/configs/dbConnection')
 dbConnection()
 
-/* // Cross-origin resource sharing (CORS): $ npm i cors
+// Swaggerda execute yapabilmek için;
+// Cors
+// Cross-origin resource sharing (CORS): $ npm i cors // dışardan ulaşılabilsin diye
 const cors = require('cors')
 const defaultCorsOptions = {
-    origin: "*",
+    origin: "*", // heryerden ulaşılabilirliği açılıyor
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204
 }
-app.use(cors()) */
+app.use(cors()) // middleware
 
 /* ------------------------------------------------------- */
 // Middlewares:

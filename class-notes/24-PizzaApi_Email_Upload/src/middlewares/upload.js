@@ -8,15 +8,14 @@
 
 const multer = require("multer")
 
-const upload = multer({
+module.exports = multer({
     // dest: "./uploads"
     storage: multer.diskStorage({
         destination: "./uploads",
         filename: function (req, file, returnCallback) {
             // console.log("file-->", file)
             // returnCallback(error, this.filename)
-            returnCallback(null, Date.now() + "_" + file.originalname)
-            
+            returnCallback(null, Date.now() + "_" + file.originalname)            
         }
     })
 })
