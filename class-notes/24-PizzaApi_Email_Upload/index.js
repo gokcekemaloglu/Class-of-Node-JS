@@ -112,20 +112,22 @@ app.use(require('./src/middlewares/queryHandler'))
 // const transporter = nodemailer.createTransport({
 //     service: "gmail",
 //     auth: {
-//         user: "gokce.kemaloglu@gmail.com",
-//         pass: "your_password"
+//         user: "alidrl26@gmail.com",
+//         pass: 'vbyt klrm hehd xubl'
 //     }
 // })
 
-// transporter.sendMail({
-//     from: "gokce.kemaloglu@gmail.com",
-//     to: "g_kemaloglu@yahoo.com",
-//     subject: "Hello from Node.js",
-//     text: "Hello myself :) How are you?",
-//     html: "<p><b>Hello myself :)</b> <br> How are you?</p>"
-// }, function (error, success) {
-//     success ? console.log("SUCCESS:", success ) : console.log("ERROR:", error)
-// })
+// ben yazmışım
+// // transporter.sendMail({
+// //     from: "gokce.kemaloglu@gmail.com",
+// //     to: "g_kemaloglu@yahoo.com",
+// //     subject: "Hello from Node.js",
+// //     text: "Hello myself :) How are you?",
+// //     html: "<p><b>Hello myself :)</b> <br> How are you?</p>"
+// // }, function (error, success) {
+// //     success ? console.log("SUCCESS:", success ) : console.log("ERROR:", error)
+// // })
+// buraya kadar
 
 //* YandexMail (yandex)
 // const transporter = nodemailer.createTransport({
