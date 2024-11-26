@@ -3,7 +3,8 @@
     NODEJS EXPRESS | Flight API
 ------------------------------------------------------- */
 // $ npm i morgan
-// app.use(logger):
+// mkdir logs
+// app.use(logger)
 
 const morgan = require('morgan')
 const fs = require('node:fs')

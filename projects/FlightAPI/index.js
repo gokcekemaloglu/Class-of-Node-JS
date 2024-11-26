@@ -44,15 +44,15 @@ app.use(require('./src/middlewares/authentication'))
 app.all('/', (req, res) => {
     res.send({
         error: false,
-        message: 'Welcome to FLIGHT RESERVATION API',
-        documents: '/documents',
-        user: req.user
+        message: 'Welcome to FLIGHT RESERVATION API'
     })
 })
 
 // Index Route:
 
-
+// 
+// app.use(require("./src/routes/index"))
+app.use(require("./src/routes"))
 
 /* ------------------------------------------------------- */
 
