@@ -35,7 +35,7 @@ app.use(require('./src/middlewares/authentication'))
 app.use(require('./src/middlewares/logger'))
 
 // Query Handler:
-app.use(require('./src/middlewares/authentication'))
+app.use(require('./src/middlewares/queryHandler'))
 
 /* ------------------------------------------------------- */
 // Routes:
@@ -53,6 +53,8 @@ app.all('/', (req, res) => {
 // 
 // app.use(require("./src/routes/index"))
 app.use(require("./src/routes"))
+
+
 
 /* ------------------------------------------------------- */
 

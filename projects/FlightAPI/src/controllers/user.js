@@ -28,7 +28,7 @@ module.exports = {
 
         res.status(200).send({
             error: false,
-            detail: res.getModelListDetails(User),
+            detail: await res.getModelListDetails(User),
             result
         })
     },
@@ -71,25 +71,60 @@ module.exports = {
             throw new Error("Password must be at least 8 characters long and contain at least one special character and at least one uppercase character")
         }
 
+        const result = await User.create(req.body)
 
+        res.status(200).send({
+            error: false,
+            result
+        })
 
     },
     read: async (req, res) => {
+        /*
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Read User"
+            `
+        */
+
+        const result = await User.findOne({_id: req.params.id})
         res.status(200).send({
             error: false,
             result
         })
     },
     update: async (req, res) => {
-        res.status(200).send({
+        /*
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Update User"
+            #swagger.parameters["body"] = {
+                in: "body",
+                required: true,
+                schema {
+                    "username": "test",
+                    "password": "1234",
+                    "email": "test@site.com",
+                    "isActive": true,
+                    "isStaff": false,
+                    "isAdmin": false,
+                }
+            }
+            `
+        */
+        const result = await User.updateOne({_id: req.params.id}, req.body) // findOneandUpdate
+        res.status(202).send({
             error: false,
             result
         })
     },
     deleteUser: async (req, res) => {
-        res.status(200).send({
-            error: false,
-            result
+        /*
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Update User"
+            `
+        */
+        const {deletedCount} = await User.deleteOne({_id: req.params.id})
+        res.status(deletedCount ? 204 : 404).send({
+            error: !deletedCount,
         })
     },
 }

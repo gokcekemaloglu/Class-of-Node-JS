@@ -5,6 +5,9 @@
 const router = require('express').Router()
 /* ------------------------------------------------------- */
 
+// Users
+router.use("/users", require("./user"))
+
 
 // documents
 router.use("/documents", require("./document"))
