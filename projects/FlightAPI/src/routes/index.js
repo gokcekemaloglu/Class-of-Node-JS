@@ -9,6 +9,8 @@ const router = require('express').Router()
 router.use("/users", require("./user"))
 // auth
 router.use("/auth", require("./auth"))
+// Passenger
+router.use("/passengers", require("./passenger"))
 
 
 // documents

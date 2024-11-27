@@ -38,18 +38,18 @@ const UserSchema = new mongoose.Schema({
         (email) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email),
         "Please fill a valid email address",
         ],
-        isActive: {
-            type: Boolean,
-            default: true
-        },
-        isStaff: {
-            type: Boolean,
-            default: false
-        },
-        isAdmin: {
-            type: Boolean,
-            default: false
-        },
+    },
+    isActive: {
+        type: Boolean,
+        default: true
+    },
+    isStaff: {
+        type: Boolean,
+        default: false
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     },
 }, {
     collection: "users",
