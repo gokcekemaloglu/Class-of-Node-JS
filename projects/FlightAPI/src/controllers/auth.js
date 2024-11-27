@@ -1,4 +1,5 @@
 "use strict"
+const passwordEncrypt = require("../helpers/passwordEncrypt")
 /* -------------------------------------------------------
     NODEJS EXPRESS | Flight API
 ------------------------------------------------------- */
@@ -18,12 +19,15 @@ module.exports = {
 
         const user = await User.findOne({$or: [ {userName}, {email}]})
         
-        if (!user) {
+        if (user?.password !== passwordEncrypt(password)) {
             res.errorStatusCode = 401
             throw new Error("Wrong Username / Email or Password!")
         }
+        res.status(200).send({
+            error: false,
+            message: "Login success"
+        })
 
-        
-
-    }
+    },
+    // logout: async (req, res) => {}
 }
