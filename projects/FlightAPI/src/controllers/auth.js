@@ -23,6 +23,11 @@ module.exports = {
             res.errorStatusCode = 401
             throw new Error("Wrong Username / Email or Password!")
         }
+
+        if (!user.isActive) {
+            res.errorStatusCode = 401;
+            throw new Error("This account is not active.");
+        }
         res.status(200).send({
             error: false,
             message: "Login success"
