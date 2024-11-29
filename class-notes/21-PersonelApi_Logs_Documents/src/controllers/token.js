@@ -6,13 +6,7 @@
 const Token = require('../models/token')
 
 
-module.exports = {
-
-    /*
-        _swagger.deprecated = true
-        _swagger.ignore = true
-
-    */
+module.exports = {   
     
     list: async (req, res) => {
         /*
