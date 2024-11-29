@@ -89,8 +89,7 @@ module.exports = {
             }
         }
     */
-
-
+    
     const data = await Reservation.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
