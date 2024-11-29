@@ -2,6 +2,9 @@
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
+// npm install jsonwebtoken
+
+
 const express = require("express");
 const app = express();
 

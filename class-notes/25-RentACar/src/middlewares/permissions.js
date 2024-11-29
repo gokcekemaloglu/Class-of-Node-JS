@@ -26,4 +26,19 @@ module.exports = {
       );
     }
   },
+  isStaffOrisAdmin: (req, res, next) => {
+    if (!(req.user?.isAdmin || req.user?.isStaff)) {
+      throw new CustomError(
+        "AuthorizationError: You must be an Admin or Staff to access this resource.",
+        403,
+      );
+    }
+    if (!req.user?.isActive) {
+      throw new CustomError(
+        "Your account is not active. Please contact support.",
+        403,
+      );
+    }
+    next();
+  },
 };
