@@ -17,14 +17,56 @@
 /* ------------------------------------------------------- */
 const { mongoose } = require("../configs/dbConnection");
 
-// Reservation Model:
+// Reservation Schema:
 const ReservationSchema = new mongoose.Schema(
-  {},
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    carId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Car",
+      required: true,
+    },
+    //begin, finish,reservationStart ve reservationEnd
+    startDate: {
+      type: Date,
+      required: true,
+    },
+    endDate: {
+      type: Date,
+      required: true,
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    createdId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    updatedId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
   {
     collection: "reservations",
     timestamps: true,
   },
-);
+)
+
+ReservationSchema.set("toJSON", {
+  transform: (doc, ret) => {
+    ret.id = ret._id
+    delete ret._id,
+    delete ret.__v
+  }
+})
 
 // Export:
 
