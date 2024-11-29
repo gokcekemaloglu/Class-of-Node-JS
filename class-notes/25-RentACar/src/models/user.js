@@ -65,7 +65,7 @@ const UserSchema = new mongoose.Schema(
   { collection: "users", timestamps: true },
 );
 
-UserSchema.plugin(uniqueValidator, {
+UserSchema.plugin(uniqueValidator, { // Güzel bir hata mesajı yazmak için kullanıyoruz
   message: "This {PATH} is exist",
 });
 

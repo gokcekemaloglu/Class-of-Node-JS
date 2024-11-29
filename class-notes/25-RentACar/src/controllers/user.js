@@ -6,6 +6,7 @@
 
 const User = require("../models/user");
 const passwordValidation = require("../helpers/passwordValidation");
+const CustomError = require("../errors/customError");
 module.exports = {
   list: async (req, res) => {
     /*
@@ -21,7 +22,11 @@ module.exports = {
             `
         */
 
-    const data = await res.getModelList(User);
+
+    // if (!req.user.isAdmin) CustomFilter = {isAdmin: false} // throw new Error("You are not an Admin", 401)
+    !req.user.isAdmin ? customFilter = {} : customFilter = {isAdmin: false} 
+
+    const data = await res.getModelList(User, customFilter);
 
     res.status(200).send({
       error: false,
@@ -43,6 +48,10 @@ module.exports = {
             }
         */
     passwordValidation(req?.body?.password);
+
+    req.body.isAdmin = false
+    req.body.isStaff = false
+    req.body.isStaff = req.user.isAdmin ? req.body.isStaff : false
     const data = await User.create(req.body);
 
     res.status(201).send({
@@ -63,7 +72,7 @@ module.exports = {
     // }
     // const data = await User.findOne({ _id: req.params.id })
 
-    const id = req.user.isAdmin ? req.params.id : req.user.id;
+    const id = req.user.isAdmin ? req.params.id : req.user._id;
     const data = await User.findOne({ _id: id });
 
     res.status(200).send({
@@ -85,10 +94,13 @@ module.exports = {
         }
     */
 
+    passwordValidation(req?.body?.password)
+    delete req.body.isAdmin
+
     //? Yetkisiz kullanıcının başka bir kullanıcıyı yönetmesini engelle (sadece kendi verileri):
     if (!req.user.isAdmin && (req.params.id !== req.user.id)) {
-      res.errorStatusCode = 401
-      throw new Error("You cannot update someone else")
+      // res.errorStatusCode = 401
+      throw new CustomError("You cannot update someone else", 401)
     }
     const data = await User.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
