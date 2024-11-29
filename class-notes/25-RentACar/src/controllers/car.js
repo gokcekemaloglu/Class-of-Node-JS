@@ -23,7 +23,7 @@ module.exports = {
 
     // don't show cars which are not available
     let customFilter = {isAvailabel: true}
-    if ( req.user.isAdmin) customFilter = {}
+    if ( req.user.isAdmin || req.user.isStaff) customFilter = {}
 
     const data = await res.getModelList(Car, customFilter);
 
@@ -46,6 +46,9 @@ module.exports = {
                 }
             }
         */
+    // remove to Authentication middlevare
+    // req.body.updateId = req.user._id
+    // req.body.createId = req.user._id
     const data = await Car.create(req.body);
 
     res.status(201).send({
@@ -93,6 +96,19 @@ module.exports = {
   },
 
   delete: async (req, res) => {
+    /*
+        #swagger.tags = ["Cars"]
+        #swagger.summary = "Delete Car"
+    */
+
+    const data = await Car.deleteOne({ _id: req.params.id });
+
+    res.status(data.deletedCount ? 204 : 404).send({
+      error: !data.deletedCount,
+      data,
+    });
+  },
+  destroy: async (req, res) => {
     /*
         #swagger.tags = ["Cars"]
         #swagger.summary = "Delete Car"
