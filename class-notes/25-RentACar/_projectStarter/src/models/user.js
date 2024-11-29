@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       required: true,
       set: (password) => passwordEncrypt(password),
-      // selected:false
+      // select:false
     },
 
     email: {

@@ -79,24 +79,27 @@ module.exports = {
 
   update: async (req, res) => {
     /*
-            #swagger.tags = ["Users"]
-            #swagger.summary = "Update User"
-            #swagger.parameters['body'] = {
-                in: 'body',
-                required: true,
-                schema: {
-                    "username": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "isActive": true,
-                    "isStaff": false,
-                    "isAdmin": false,
-                }
+        #swagger.tags = ["Users"]
+        #swagger.summary = "Update User"
+        #swagger.parameters['body'] = {
+            in: 'body',
+            required: true,
+            schema: {
+                "username": "test",
+                "password": "1234",
+                "email": "test@site.com",
+                "isActive": true,
+                "isStaff": false,
+                "isAdmin": false,
             }
-        */
+        }
+    */
 
     //? Yetkisiz kullanıcının başka bir kullanıcıyı yönetmesini engelle (sadece kendi verileri):
-    if (!req.user.isAdmin) req.params.id = req.user._id;
+    if (!req.user.isAdmin && (req.params.id !== req.user.id)) {
+      res.errorStatusCode = 401
+      throw new Error("You cannot update someone else")
+    }
     const data = await User.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
@@ -110,9 +113,9 @@ module.exports = {
 
   delete: async (req, res) => {
     /*
-            #swagger.tags = ["Users"]
-            #swagger.summary = "Delete User"
-        */
+        #swagger.tags = ["Users"]
+        #swagger.summary = "Delete User"
+    */
 
     const data = await User.deleteOne({ _id: req.params.id });
 

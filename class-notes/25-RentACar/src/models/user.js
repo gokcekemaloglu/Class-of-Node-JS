@@ -2,6 +2,8 @@
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 /* ------------------------------------------------------- *
+
+npm i mongoose-unique-validator // güzel bir hata mesaj vermek için ek paket
 {
     "username": "test",
     "password": "1234",
@@ -13,6 +15,7 @@
 /* ------------------------------------------------------- */
 
 const { mongoose } = require("../configs/dbConnection");
+const emailValidation = require("../helpers/emailValidation");
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 const uniqueValidator = require("mongoose-unique-validator");
 // User Model:
@@ -30,20 +33,16 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       required: true,
       set: (password) => passwordEncrypt(password),
-      // selected:false
+      // select: false // userların password'ünü görmemek için //  database'den password'ün gelmesini engelliyoruz
     },
 
     email: {
       type: String,
       trim: true,
       required: [true, "An Email address is required"],
-      unique: [true, "There is this email. Email field must be unique"],
+      unique: true, // [true, "There is this email. Email field must be unique"] // bu hiçbir zaman çaşlımayacak bir hata mesajı, duplicate mesajı oluyor
       validate: [
-        (email) => {
-          const regexEmailCheck =
-            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-          return regexEmailCheck.test(email);
-        },
+        (email) => emailValidation(email),
         "Email format is not valid",
       ],
     },
