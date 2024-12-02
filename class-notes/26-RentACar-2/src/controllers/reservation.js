@@ -4,6 +4,9 @@
 ------------------------------------------------------- */
 // Reservation Controller:
 const Reservation = require("../models/reservation");
+const dateValidation = require("../helpers/dateValidation");
+const CustomError = require("../errors/customError");
+const Car = require("../models/car");
 
 module.exports = {
   list: async (req, res) => {
@@ -25,7 +28,12 @@ module.exports = {
     if(!req.user.isAdmin || !req.user.isStaff) customFilter = {userId: req.user._id}
 
 
-    const data = await res.getModelList(Reservation, customFilter);
+    const data = await res.getModelList(Reservation, customFilter, [
+      { path: "userId", select: "username firstName lastName" },
+      { path: "carId", select: "brand model" },
+      { path: "createdId", select: "username" },
+      { path: "updatedId", select: "username" },
+    ]);
 
     res.status(200).send({
       error: false,
@@ -47,11 +55,44 @@ module.exports = {
         }
     */
 
+        // if user is not admin or not staff
     if(!req.user.isAdmin || !req.user.isStaff) {
       req.body.userId = req.user._id
     } else if(!req.body.userId){
       req.body.userId = req.user._id
-    }    
+    }
+
+    const [start, end, reservedDays] = dateValidation(req.body?.startDate, req.body?.endDate)
+
+    const isReserved = await Reservation.find({
+      carId: req.body?.endDate,
+      startDate: {$lte: req.body?.endDate},
+      endDate: {$gte: req.body?.startDate}
+    })
+    //dont allow to make reservation if already reserved
+    if (isReserved) {
+      throw new CustomError("The car is already reserved for the given dates", 400)
+    }
+
+    // check if user reserved any car in requested dates
+    const userReservationInDates = await Reservation.findOne({
+      userId: req.body.userId,
+      startDate: {$lte: req.body.endDate},
+      endDate: {$gte: req.body.startDate}
+    })
+
+    if (userReservationInDates) {
+      throw new CustomError("The user is already reserved another car for the given dates", 400)
+    }
+
+    const dailyCost = await Car.findOne({_id: req.body?.carId}, {_id: 0, pricePerDay: 1})
+      .then((car)=> Number(car.pricePerDay))
+
+    // const dailyCost = Number(carInfo.pricePerDay)
+    // console.log(dailyCost);
+    req.body.amount = reservedDays * dailyCost
+
+    // console.log(start, end, reservedDays);    
 
     const data = await Reservation.create(req.body);
 
