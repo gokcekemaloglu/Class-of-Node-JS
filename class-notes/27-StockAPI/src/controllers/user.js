@@ -11,7 +11,7 @@ module.exports = {
             #swagger.tags = ["Users"]
             #swagger.summary = "List Users"
             #swagger.description = `
-                You can send query with endpoint for search[], sort[], page and limit.
+                You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.
                 <ul> Examples:
                     <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>
                     <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>
@@ -37,7 +37,11 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/User"
+                    "username": "test",
+                    "password": "1234",
+                    "email": "test@site.com",
+                    "firstName": "test",
+                    "lastName": "test",
                 }
             }
         */
@@ -71,7 +75,11 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                   $ref:"#/definitions/User"
+                   "username": "test",
+                    "password": "1234",
+                    "email": "test@site.com",
+                    "firstName": "test",
+                    "lastName": "test",
                 }
             }
         */
