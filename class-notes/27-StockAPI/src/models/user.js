@@ -69,12 +69,13 @@ const UserSchema = new mongoose.Schema({
     timestamps: true
 })
 /* ------------------------------------------------------- */
+
 //! database'e kaydetmeden hemen önce çalışan bir pre-middleware'miş
 UserSchema.pre(["save", "updateOne"], function (next) { 
     // console.log("Pre-save run!");
     // console.log(this);
 
-    // this; save komutunda body'deki bilgileri içeriyor. Ancak updateOne'da birçok veri döndürüyor. Biz içinden _update key'ine ulaşıyoruz.
+    // this; save(create edildiğinde) komutunda body'deki bilgileri içeriyor. Ancak updateOne(update edildiğinde) komutunda birçok veri döndürüyor. Biz içinden _update key'ine ulaşıyoruz.
     // const data = this; // database'e kaydedilecek olan veri --> this // data artık bağımsiz birşeye dönüşüyor, this'deki verilerle dolmuş olan bambaşka bir veri
 
     const data = this?._update ?? this; // updateOne'a uyarlanmış hali oluyor
@@ -98,10 +99,16 @@ UserSchema.pre(["save", "updateOne"], function (next) {
     }
 
     if (data.password) {
-        this.password = passwordEncrypt(data.password)
+        if (this?._update) { //update için
+            this._update.password = passwordEncrypt(data.password)
+        } else { // create için
+            this.password = passwordEncrypt(data.password)
+        }        
     }    
     next()
 })
+// UserSchema.pre(["save", "updateOne"], prefunction(next)) // bunu bir dene helper'a function olarak atarak
 
+/* ------------------------------------------------------- */
 
 module.exports = mongoose.model("User", UserSchema)
