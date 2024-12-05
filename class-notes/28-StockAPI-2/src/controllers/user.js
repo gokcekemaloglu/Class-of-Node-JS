@@ -1,10 +1,13 @@
 "use strict"
 /* -------------------------------------------------------
-    | FULLSTACK TEAM | NODEJS / EXPRESS |
+| FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
 // User Controllers:
 
 const User = require('../models/user')
+const jwt = require("jsonwebtoken")
+const Token = require('../models/token')
+const passwordEncrypt = require('../helpers/passwordEncrypt')
 
 module.exports = {
     list: async (req, res) => {
@@ -49,12 +52,52 @@ module.exports = {
             }
         */
 
-        const data = await User.create(req.body)
+        // Erkan hocamızın isteğiyle; kullanıcı register olduğunda login olmuş olsun
 
-        res.status(201).send({
+        const user = await User.create(req.body)
+
+        /* SIMPLE TOKEN */
+        
+        const tokenData = await Token.create({
+            userId: user._id,
+            token: passwordEncrypt(user._id + Date.now()),
+        });
+        
+        /* SIMPLE TOKEN */
+
+        /* JWT */
+        
+
+        // AccessToken:
+        const accessData = {
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            isActive: user.isActive,
+            isAdmin: user.isAdmin
+        }
+
+        
+        const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, { expiresIn: '30m' })
+
+        // RefreshToken: 
+        const refreshData = {
+            _id: user._id,
+            password: user.password
+        }
+        // Convert to JWT
+        const refreshToken = jwt.sign(refreshData, process.env.REFRESH_KEY, { expiresIn: '1d' })
+        /* JWT */
+
+        res.send({
             error: false,
-            data
-        })
+            token: tokenData.token,
+            bearer: {
+                access: accessToken,
+                refresh: refreshToken
+            },
+            user
+        });
     },
 
     read: async (req, res) => {
