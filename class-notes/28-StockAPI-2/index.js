@@ -23,6 +23,10 @@ require('express-async-errors')
 const { dbConnection } = require('./src/configs/dbConnection')
 dbConnection()
 
+// CORS:
+const cors = require('cors')
+app.use(cors({ origin: 'http://localhost:5173' }))
+
 /* ------------------------------------------------------- */
 // Middlewares:
 

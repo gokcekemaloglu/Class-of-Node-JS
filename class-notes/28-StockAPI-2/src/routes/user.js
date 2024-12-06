@@ -7,6 +7,7 @@ const router = require('express').Router()
 // routes/user:
 
 const user = require('../controllers/user')
+const permissions = require('../middlewares/permissions')
 
 // URL: /users
 

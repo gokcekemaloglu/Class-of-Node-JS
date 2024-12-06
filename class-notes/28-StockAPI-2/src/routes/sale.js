@@ -7,6 +7,7 @@ const router = require('express').Router()
 // routes/sale:
 
 const sale = require('../controllers/sale')
+const permissions = require('../middlewares/permissions')
 
 // URL: /sales
 

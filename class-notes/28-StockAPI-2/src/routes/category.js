@@ -7,6 +7,7 @@ const router = require('express').Router()
 // routes/category:
 
 const category = require('../controllers/category')
+const permissions = require('../middlewares/permissions')
 
 // URL: /categories
 

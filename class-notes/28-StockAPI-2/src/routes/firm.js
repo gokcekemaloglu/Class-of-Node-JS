@@ -7,6 +7,7 @@ const router = require('express').Router()
 // routes/firm:
 
 const firm = require('../controllers/firm')
+const permissions = require('../middlewares/permissions')
 
 // URL: /firms
 

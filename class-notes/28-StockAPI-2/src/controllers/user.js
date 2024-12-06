@@ -25,8 +25,9 @@ module.exports = {
                 </ul>
             `
         */
-
-        const data = await res.getModelList(User)
+        // Sadece kendi kayıtlarını görebilir:
+        const customFilters = req.user?.isAdmin ? {} : { _id: req.user._id }
+        const data = await res.getModelList(User, customFilters)
 
         res.status(200).send({
             error: false,
