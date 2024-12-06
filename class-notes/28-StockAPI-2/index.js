@@ -65,6 +65,14 @@ app.all('/', (req, res) => {
 // Routes:
 app.use(require('./src/routes'))
 
+// Not Found
+app.use('*', (req, res) => {
+    res.status(404).json({
+        error: true,
+        message: '404 Not Found'
+    })
+})
+
 /* ------------------------------------------------------- */
 
 // errorHandler:
