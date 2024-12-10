@@ -134,6 +134,9 @@
     # Image'den Container aç ve container'a isim ver:
     $ docker run --name <containername> <imagename>
 
+    # stock app'teki örnek: bizim local 8000 dockerda çalıştığını anlamak için 7000 yapıyoruz browser 7000 yapınca çalıştı
+    $ docker run --name backend -p 7000:8000 backend
+
     # Container'leri listele:
     $ docker container ls
     $ docker ps
