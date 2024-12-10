@@ -1,0 +1,16 @@
+FROM node:current-alpine3.21
+
+WORKDIR /backend
+
+COPY . .
+# dosya olusturma: mkdir, -p: varsa var olanı kullan yoksa logs dosyasını oluştur demek. Sadece 1 kere çalışıyor.
+# RUN ile olan komutların hepsi sadece 1 kere çalışan komutlar
+RUN mkdir -p logs
+RUN mkdir -p uploads
+RUN npm install
+
+# terminal komutunu buraya yazıyoruz
+CMD ["npm", "start"]
+
+# docker'ın kendi bir portu var, 8000 portunda çalıştır dedik
+EXPOSE 8000
