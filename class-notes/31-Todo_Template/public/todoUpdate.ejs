@@ -33,7 +33,7 @@
                             <select class="form-select" name="priority">
                                 <% for (let key in priorities) { %>
                                     <option 
-                                        value="<%= key %>" 
+                                        value="<%= key %>"
                                         <%= (todo.priority == key) ? 'selected' : '' %> 
                                     >
                                         <%= priorities[key] %>
