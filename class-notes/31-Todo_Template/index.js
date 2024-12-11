@@ -15,14 +15,37 @@ require('express-async-errors')
 
 // Parse json data:
 app.use(express.json())
+        /* ------------------------------ */
+// Accept form data and convert to object:
+app.use(express.urlencoded({ extended: true }))
+
+/* ------------------------------------------------------- */
+// Templates: 
+// $ npm i ejs
+// https://ejs.co/
+
+// console.log(app);
+
+app.set("view engine", "ejs")
+// Default template folder is : ./views
+app.set("views", "./public")
+
+// app.get("/view", (req, res)=> {
+//     res.render("index")
+// })
 
 /* ------------------------------------------------------- */
 // Routes
 app.all('/', (req, res) => {
-    res.send('WELCOME TO TODO API')
+    // res.render("index")
+    res.send(`
+            <p><a href="/view">Todo Template</a></p>
+            <p><a href="/api">Todo RestAPI</a></p>
+        `)
 })
 
-app.use(require('./src/routes/todo'))
+app.use("/view", require('./src/routes/todo.view'))
+app.use("/api", require('./src/routes/todo.api'))
 
 /* ------------------------------------------------------- */
 // Error Handler

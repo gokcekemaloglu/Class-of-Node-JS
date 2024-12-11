@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJS</title>
+</head>
+<body>
+    <h1>HELLO DE09</h1>
+    <!-- Send Code to Node.js -->
+     <%
+        console.log("hello everybody")
+        console.log("birden fazla satır yazılabilir")
+     %>
+     <!-- safe-print to html -->
+     <%= 5+9 %>
+     <%= '<p>Hi <b>Gokce</b></p>' %>
+     <!-- direct-print to html -->
+     <%- "<p>Hi <b>Gokce</b></p>" %>
+     <!-- comment with ejs -->
+     <%# comment %>
+     <!-- direct-print to html and remove newline (/n) -->
+     <%- "<p>Hi <b>Gokce</b></p>" -%>
+</body>
+</html>

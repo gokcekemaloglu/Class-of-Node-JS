@@ -8,28 +8,8 @@
 
 const router = require("express").Router()
 // Contorollers
-const { list, create, read, update, delete: deleteTodo } = require('../controllers/todo')
+const { list, create, read, update, delete: deleteTodo } = require('../controllers/todo.api')
 
-
-/*------------------------------------------------------- *
-
-// List Todo:
-router.get('/todo', list)
-
-// CRUD Operations -->
-
-// Creeate Todo:
-router.post('/todo', create)
-
-// Read Todo
-router.get('/todo/:id', read)
-
-// Updata Todo
-router.put('/todo/:id', update)
-
-
-// Delete Todo
-router.delete('/todo/:id', deleteTodo)
 /*------------------------------------------------------- */
 
 router.route('/todo')
