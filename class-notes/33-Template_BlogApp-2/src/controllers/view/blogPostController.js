@@ -47,8 +47,11 @@ module.exports = {
     // const data = await BlogPost.findByIdAndUpdate(req.params.postId, req.body, { new: true }) // return new-data
     if (req.method == "POST") {
       const data = await BlogPost.updateOne({ _id: req.params.postId }, req.body, { runValidators: true });
+      res.redirect("/blog/post")
     } else {
-      res.render("postForm")
+      const post = await BlogPost.findOne({ _id: req.params.postId }).populate("blogCategoryId");
+      const categories = await BlogCategory.find()
+      res.render("postForm", {post, categories})
     }
   },
 

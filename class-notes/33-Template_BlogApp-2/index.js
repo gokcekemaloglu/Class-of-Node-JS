@@ -48,6 +48,12 @@ require("./src/dbConnection");
 // Searching&Sorting&Pagination:
 app.use(require("./src/middlewares/queryHandler"));
 
+// Ejs'de globale değişken saklama yöntemi
+app.use((req, res, next) => {
+  res.locals.user = req.session?.user
+  next()
+})
+
 // StaticFiles:
 app.use("/assets", express.static("./public/assets"));
 

@@ -14,5 +14,7 @@ router.use("/category", require("./blogCategoryRoute"));
 router.use("/post", require("./blogPostRoute"));
 // user:
 router.use("/user", require("./userRoute"));
+// auth
+router.use("/", require("./authRoute"));
 
 module.exports = router;
