@@ -26,7 +26,14 @@
                     <a class="blog-header-logo text-body-emphasis text-decoration-none" href="/">MY BLOG</a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-sm btn-outline-secondary" href="/blog/login">Login</a>
+                    {% if (user) { %}
+                        <b>{%= user?.email %}</b>
+                        <a class="btn btn-sm btn-outline-secondary" href="/blog/logout">Logout</a>
+                    {% } else { %}
+                        <a class="btn btn-sm btn-outline-secondary" href="/blog/login">Login</a>
+
+                    {% } %}
+                    
                 </div>
             </div>
         </header>

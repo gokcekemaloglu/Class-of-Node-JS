@@ -57,6 +57,9 @@ app.use((req, res, next) => {
 // StaticFiles:
 app.use("/assets", express.static("./public/assets"));
 
+//
+app.use("/tinymce", express.static("./node_modules/tinymce"));
+
 // HomePage:
 app.all("/", (req, res) => {
   res.redirect("/blog/post");

@@ -5,6 +5,7 @@
 
 const BlogPost = require("../../models/blogPostModel");
 const BlogCategory = require("../../models/blogCategoryModel");
+const removeQueryParam = require("../../helpers/removeQueryParam");
 
 // ------------------------------------------
 // BlogPost
@@ -18,21 +19,40 @@ module.exports = {
     // list all categories
     const categories = await BlogCategory.find()
     // List recent 3 posts
-    const recentPosts = await BlogPost.find().sort({ createdAt: "desc" }).limit(3)
+    const recentPosts = await BlogPost.find( { published: true }).sort({ createdAt: "desc" }).limit(3)
     // Get page details
     const details = await res.getModelListDetails(BlogPost, { published: true })
 
-    res.render('index', { categories, posts: data, recentPosts, details})
+    // req.originalUrl
+    // console.log(req.originalUrl);
+    let pageUrl = ""
+    const queryString = req.originalUrl.split("?")[1]
+
+    if (queryString) {
+      pageUrl = removeQueryParam(queryString, "page")
+    }
+
+    pageUrl = pageUrl ? "&" + pageUrl : ""
+
+    res.render('index', { categories, posts: data, recentPosts, details, pageUrl})
   },
 
   create: async (req, res) => {
-    const data = await BlogPost.create(req.body);
 
-    res.status(201).send({
-      error: false,
-      body: req.body,
-      result: data,
-    });
+    
+    if (req.method == "POST") {
+      req.body.userId = req.session?.user.id
+      // console.log(req.body);
+      
+      const data = await BlogPost.create(req.body);
+      res.redirect("/blog/post")
+    } else {
+
+      const categories = await BlogCategory.find()
+
+      res.render("postForm", {post: null, categories})
+    }
+    
   },
 
   read: async (req, res) => {
@@ -55,6 +75,7 @@ module.exports = {
     }
   },
 
+  //todo - complete this controller
   delete: async (req, res) => {
     const data = await BlogPost.deleteOne({ _id: req.params.postId });
 
