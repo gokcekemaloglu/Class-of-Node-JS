@@ -5,7 +5,7 @@
 
         {% categories.forEach((category)=> { %}
 
-        <a class="nav-item nav-link link-body-emphasis" href="#">
+        <a class="nav-item nav-link link-body-emphasis" href="/blog/post?filter[blogCategoryId]={%= category._id %}">
             {%= category.name %}
         </a>
 

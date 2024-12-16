@@ -1,4 +1,4 @@
-{%- include('includes/header') %}
+{%- include('components/header') %}
 </div>
 <!-- main start -->
 <main class="container">
@@ -11,7 +11,7 @@
                 Published: true
             </div>
             <article class="blog-post">
-                <a href="/post?filter[blogCategoryId]=:id"># CategoryName</a>
+                <a href="/post?filter[blogCategoryId]=:id"># {%= post.blogCategoryId.name %}</a>
                 <h2 class="display-5 mb-1">
                     <a href="/post/:id" class="link-body-emphasis text-decoration-none">Sample Blog Post</a>
                 </h2>
@@ -40,4 +40,4 @@
 </main>
 <!-- main end -->
 
-{%- include('includes/footer') %}
+{%- include('components/footer') %}
