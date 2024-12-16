@@ -45,18 +45,11 @@ module.exports = {
 
   update: async (req, res) => {
     // const data = await BlogPost.findByIdAndUpdate(req.params.postId, req.body, { new: true }) // return new-data
-    const data = await BlogPost.updateOne(
-      { _id: req.params.postId },
-      req.body,
-      { runValidators: true },
-    );
-
-    res.status(202).send({
-      error: false,
-      body: req.body,
-      result: data, // update infos
-      newData: await BlogPost.findOne({ _id: req.params.postId }),
-    });
+    if (req.method == "POST") {
+      const data = await BlogPost.updateOne({ _id: req.params.postId }, req.body, { runValidators: true });
+    } else {
+      res.render("postForm")
+    }
   },
 
   delete: async (req, res) => {
